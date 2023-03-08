@@ -1,0 +1,63 @@
+{
+	"Name": "NorthSR.SpeedrunMod",
+	"Description": "Extra settings and tools for speedrunners",
+	"Version": "0.0.1",
+	"LoadPriority": 0,
+	"ConVars": [
+		{
+			"Name": "srm_enable_speedometer",
+			"DefaultValue": "0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_unit",
+			"DefaultValue": "0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_include_z",
+			"DefaultValue": "0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_fadeout",
+			"DefaultValue": "0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_enable_mp",
+			"DefaultValue": "1",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_enable_ckf",
+			"DefaultValue": "1",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_practice_mode",
+			"DefaultValue": "0",
+		},
+	],
+	"Scripts": [
+		{
+			"Path": "ui/srm_ui_utils.nut",
+			"RunOn": "UI"
+		},
+	    {
+		    "Path": "ui/srm_menu_settings.nut",
+		    "RunOn": "UI",
+		    "UICallback": {
+		    	"Before": "SRM_AddSettingsMenu"
+		    }
+	    },
+		{
+			"Path": "ui/srm_menu_speedometer_settings.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/srm_menu_practicewarps.nut",
+			"RunOn": "UI",
+		},
+	]
+}

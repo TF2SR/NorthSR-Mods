@@ -1,0 +1,136 @@
+resource/ui/menus/srm_speedometer_settings.menu
+{
+	menu
+	{
+		ControlName				Frame
+		xpos					0
+		ypos					0
+		zpos					3
+		wide					f0
+		tall					f0
+		autoResize				0
+		visible					1
+		enabled					1
+		pinCorner				0
+		PaintBackgroundType		0
+		infocus_bgcolor_override	"0 0 0 0"
+		outoffocus_bgcolor_override	"0 0 0 0"
+
+        Vignette
+        {
+            ControlName             ImagePanel
+            InheritProperties       MenuVignette
+        }
+
+		Title
+		{
+			ControlName				Label
+			InheritProperties		MenuTitle
+			labelText				"Speedometer Settings"
+		}
+
+		ImgTopBar
+		{
+			ControlName				ImagePanel
+			InheritProperties		MenuTopBar
+		}
+
+		MatchmakingStatus
+		{
+			ControlName				CNestedPanel
+			xpos					0
+			ypos					0
+			wide					f0
+			tall					f0
+			visible					1
+			controlSettingsFile		"resource/ui/menus/panels/matchmaking_status.res"
+		}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		LblMenuItemDescription
+		{
+			ControlName				RuiPanel
+			xpos					975
+			ypos					158
+			tall					370
+			wide 					844
+			rui                     "ui/control_options_description.rpak"
+		}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		ImgSubheaderBackground
+		{
+			ControlName				ImagePanel
+			InheritProperties		SubheaderBackground
+			xpos					96
+			ypos					160
+		}
+		LblSubheaderText
+		{
+			ControlName				Label
+			InheritProperties		SubheaderText
+			pin_to_sibling			ImgSubheaderBackground
+			pin_corner_to_sibling	LEFT
+			pin_to_sibling_corner	LEFT
+			labelText				""
+		}
+
+		SwchSpeedometerUnit
+		{
+			ControlName				RuiButton
+			InheritProperties		SwitchButton
+			style					DialogListButton
+			ConVar					"srm_speedometer_unit"
+			list
+			{
+				"Metric"			0
+				"Imperial"			1
+			}
+			pin_to_sibling			ImgSubheaderBackground
+			pin_corner_to_sibling	TOP_LEFT
+			pin_to_sibling_corner	BOTTOM_LEFT
+		}
+
+		SwchSpeedometerIncludeZ
+		{
+			ControlName				RuiButton
+			InheritProperties		SwitchButton
+			style					DialogListButton
+			ConVar					"srm_speedometer_include_z"
+			list
+			{
+				"#SETTING_OFF"		0
+				"#SETTING_ON"	    1
+			}
+			pin_to_sibling			SwchSpeedometerUnit
+			pin_corner_to_sibling	TOP_LEFT
+			pin_to_sibling_corner	BOTTOM_LEFT
+		}
+
+		SwchSpeedometerFadeout
+		{
+			ControlName				RuiButton
+			InheritProperties		SwitchButton
+			style					DialogListButton
+			ConVar					"srm_speedometer_fadeout"
+			list
+			{
+				"#SETTING_ENABLED"	1
+				"#SETTING_DISABLED"	0
+			}
+			pin_to_sibling			SwchSpeedometerIncludeZ
+			pin_corner_to_sibling	TOP_LEFT
+			pin_to_sibling_corner	BOTTOM_LEFT
+		}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		FooterButtons
+		{
+			ControlName				CNestedPanel
+			InheritProperties       FooterButtons
+		}
+	}
+}
