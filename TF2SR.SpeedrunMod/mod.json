@@ -48,7 +48,7 @@
 		    "Path": "ui/srm_menu_settings.nut",
 		    "RunOn": "UI",
 		    "UICallback": {
-		    	"Before": "SRM_AddSettingsMenu"
+		    	"Before": "SRM_AddSettingSubmenus"
 		    }
 	    },
 		{
@@ -57,6 +57,49 @@
 		},
 		{
 			"Path": "ui/srm_menu_practicewarps.nut",
+			"RunOn": "UI",
+			"UICallback": {
+				"Before": "SRM_AddPracticeWarpSubmenus"
+			}
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_gauntletwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_btwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_bnrwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_itawarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_encwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_bwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_tbfwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_arkwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_menu_foldwarps.nut",
+			"RunOn": "UI",
+		},
+		{
+			"Path": "ui/practicewarps/srm_practicewarps_utils.nut",
 			"RunOn": "UI",
 		},
 	]

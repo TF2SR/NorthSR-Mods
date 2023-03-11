@@ -1,5 +1,5 @@
 global function SRM_InitSettingsMenu
-global function SRM_AddSettingsMenu
+global function SRM_AddSettingSubmenus
 
 struct
 {
@@ -87,7 +87,7 @@ void function SRM_OnCloseSettingsMenu()
 	SavePlayerSettings()
 }
 
-void function SRM_AddSettingsMenu()
+void function SRM_AddSettingSubmenus()
 {
 	AddMenu( "SRM_SettingsMenu", $"resource/ui/menus/srm_settings.menu", SRM_InitSettingsMenu)
 	AddMenu( "SRM_SpeedometerSettingsMenu", $"resource/ui/menus/srm_speedometer_settings.menu", SRM_InitSpeedometerSettingsMenu)

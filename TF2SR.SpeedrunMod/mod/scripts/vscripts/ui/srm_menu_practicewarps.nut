@@ -1,4 +1,5 @@
 global function SRM_InitPracticeWarpsMenu
+global function SRM_AddPracticeWarpSubmenus
 
 struct SPLevelStartStruct
 {
@@ -86,6 +87,18 @@ void function SRM_InitPracticeWarpsMenu()
 	AddMenuFooterOption( menu, BUTTON_B, "#B_BUTTON_BACK", "#BACK" )
 }
 
+void function SRM_AddPracticeWarpSubmenus()
+{
+	AddMenu( "SRM_GauntletWarpsMenu", $"resource/ui/menus/warpmenus/srm_gauntletwarps.menu", SRM_InitGauntletWarpsMenu)
+	AddMenu( "SRM_BTWarpsMenu", $"resource/ui/menus/warpmenus/srm_btwarps.menu", SRM_InitBTWarpsMenu)
+	AddMenu( "SRM_BNRWarpsMenu", $"resource/ui/menus/warpmenus/srm_bnrwarps.menu", SRM_InitBNRWarpsMenu)
+	AddMenu( "SRM_ITAWarpsMenu", $"resource/ui/menus/warpmenus/srm_itawarps.menu", SRM_InitITAWarpsMenu)
+	AddMenu( "SRM_ENCWarpsMenu", $"resource/ui/menus/warpmenus/srm_encwarps.menu", SRM_InitENCWarpsMenu)
+	AddMenu( "SRM_BWarpsMenu", $"resource/ui/menus/warpmenus/srm_bwarps.menu", SRM_InitBWarpsMenu)
+	AddMenu( "SRM_TBFWarpsMenu", $"resource/ui/menus/warpmenus/srm_tbfwarps.menu", SRM_InitTBFWarpsMenu)
+	AddMenu( "SRM_ArkWarpsMenu", $"resource/ui/menus/warpmenus/srm_arkwarps.menu", SRM_InitArkWarpsMenu)
+	AddMenu( "SRM_FoldWarpsMenu", $"resource/ui/menus/warpmenus/srm_foldwarps.menu", SRM_InitFoldWarpsMenu)
+}
 
 bool function SPButtonInit( var button, int elemNum )
 {
@@ -137,15 +150,15 @@ void function SPButton_Click( var button, int elemNum )
 
 	switch (elemNum)
 	{
-		case 0: AdvanceMenu( GetMenu( "SRM_GauntletWarpsMenu" ) )
-		case 1: AdvanceMenu( GetMenu( "SRM_BTWarpsMenu" ) )
-		case 2: AdvanceMenu( GetMenu( "SRM_BNRWarpsMenu" ) )
-		case 3: AdvanceMenu( GetMenu( "SRM_ITAWarpsMenu" ) )
-		case 4: AdvanceMenu( GetMenu( "SRM_ENCWarpsMenu" ) )
-		case 5: AdvanceMenu( GetMenu( "SRM_BWarpsMenu" ) )
-		case 6: AdvanceMenu( GetMenu( "SRM_TBFWarpsMenu" ) )
-		case 7: AdvanceMenu( GetMenu( "SRM_ArkWarpsMenu" ) )
-		case 8: AdvanceMenu( GetMenu( "SRM_FoldWarpsMenu" ) )
+		case 0: AdvanceMenu( GetMenu( "SRM_GauntletWarpsMenu" ) ); break
+		case 1: AdvanceMenu( GetMenu( "SRM_BTWarpsMenu" ) ); break
+		case 2: AdvanceMenu( GetMenu( "SRM_BNRWarpsMenu" ) ); break
+		case 3: AdvanceMenu( GetMenu( "SRM_ITAWarpsMenu" ) ); break
+		case 4: AdvanceMenu( GetMenu( "SRM_ENCWarpsMenu" ) ); break
+		case 5: AdvanceMenu( GetMenu( "SRM_BWarpsMenu" ) ); break
+		case 6: AdvanceMenu( GetMenu( "SRM_TBFWarpsMenu" ) ); break
+		case 7: AdvanceMenu( GetMenu( "SRM_ArkWarpsMenu" ) ); break
+		case 8: AdvanceMenu( GetMenu( "SRM_FoldWarpsMenu" ) ); break
 	}
 }
 
