@@ -650,8 +650,8 @@ void function UpdateTrialLabel()
 	//bool isTrialVersion
 	//bool lastIsTrialVersion = Script_IsRunningTrialVersion()
 
-	Hud_SetColor( file.trialLabel, 101, 109, 207, 255 )
-	Hud_SetText( file.trialLabel, "+ NORTHSTAR" )
+	Hud_SetColor( file.trialLabel, 249, 138, 34, 255 )
+	Hud_SetText( file.trialLabel, "NORTHSR" )
 	Hud_SetVisible( file.trialLabel, true )
 
 	//while ( GetTopNonDialogMenu() == file.menu )

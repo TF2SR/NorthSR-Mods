@@ -4,6 +4,7 @@ global function AddNorthstarModMenu
 global function AddNorthstarModMenu_MainMenuFooter
 global function ReloadMods
 
+global const WEBBROWSER_FLAG_FORCEEXTERNAL = 1 << 1 // 2
 
 struct modData {
 	string name = ""

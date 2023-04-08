@@ -38,11 +38,19 @@
 			"Name": "srm_practice_mode",
 			"DefaultValue": "0",
 		},
+		{
+			"Name": "srm_test",
+			"DefaultValue": "0",
+		}
 	],
 	"Scripts": [
 		{
 			"Path": "ui/srm_ui_utils.nut",
 			"RunOn": "UI"
+		},
+		{
+			"Path": "srm_sh_utils.gnut",
+			"RunOn": "SERVER || CLIENT || UI",
 		},
 	    {
 		    "Path": "ui/srm_menu_settings.nut",
@@ -55,6 +63,16 @@
 			"Path": "ui/srm_menu_speedometer_settings.nut",
 			"RunOn": "UI",
 		},
+		{
+			"Path": "sp/srm_savestates.nut",
+			"RunOn": "SERVER && SP",
+		},
+		{
+			"Path": "client/srm_infohud.nut",
+			"RunOn": "CLIENT && SP",
+		},
+
+
 		{
 			"Path": "ui/srm_menu_practicewarps.nut",
 			"RunOn": "UI",

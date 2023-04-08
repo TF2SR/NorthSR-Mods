@@ -31,7 +31,14 @@ void function SRM_InitSettingsMenu()
 	SetupButton( Hud_GetChild( menu, "SwchShowPos"), "Show Position", "`1Player Position: `0Shows position, angle and velocity from the player model\n\n`1Camera Position: `0Shows position, angle and velocity from the player camera")
 	
 	// Practice Tools
-	SetupButton( Hud_GetChild( menu, "SwchPracticeMode"), "Practice Mode", "`2NOT LEADERBOARD LEGAL!\n\n`1Some extra tools and settings to make practice a bit easier\n\n`0- Sets sv_cheats to 1\n- Disables input prevention on saveload\n- Makes quicksaves save your velocity\n- Enables use of savestates\n\nNote: Savestates do not account for level progression or NPC positions, as it simply teleports you back to the place where you created the savestate.")
+	AddButtonEventHandler(
+		SetupButton(
+			Hud_GetChild( menu, "SwchPracticeMode"),
+			"Practice Mode",
+			"`2NOT LEADERBOARD LEGAL!\n\n`1Some extra tools and settings to make practice a bit easier\n\n`0- Sets sv_cheats to 1\n- Disables input prevention on saveload\n- Makes quicksaves save your velocity\n- Enables use of savestates\n\nNote: Savestates do not account for level progression or NPC positions, as it simply teleports you back to the place where you created the savestate."
+			),
+		UIE_CLICK, SRM_ClickedPracticeMode
+	)
 	AddButtonEventHandler(
 		SetupButton(
 			Hud_GetChild( menu, "BtnPracticeWarps" ),
@@ -63,6 +70,20 @@ void function SRM_InitSettingsMenu()
 	AddEventHandlerToButtonClass( menu, "RuiFooterButtonClass", UIE_GET_FOCUS, FooterButton_Focused )
 	AddMenuFooterOption( menu, BUTTON_A, "#A_BUTTON_SELECT" )
 	AddMenuFooterOption( menu, BUTTON_B, "#B_BUTTON_BACK", "#BACK" )
+}
+
+void function SRM_ClickedPracticeMode( var button )
+{
+	if (GetConVarInt("srm_practice_mode") == 1)
+	{
+		SetConVarInt("sv_cheats", 1)
+		SetConVarFloat("player_respawnInputDebounceDuration", 0.0)
+	}
+	else
+	{
+		SetConVarInt("sv_cheats", 0)
+		SetConVarFloat("player_respawnInputDebounceDuration", 0.5)
+	}
 }
 
 void function SRM_ClickedResetHelmets( var button )
