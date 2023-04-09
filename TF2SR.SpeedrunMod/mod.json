@@ -38,10 +38,6 @@
 			"Name": "srm_practice_mode",
 			"DefaultValue": "0",
 		},
-		{
-			"Name": "srm_test",
-			"DefaultValue": "0",
-		}
 	],
 	"Scripts": [
 		{
@@ -69,6 +65,10 @@
 		},
 		{
 			"Path": "client/srm_infohud.nut",
+			"RunOn": "CLIENT && SP",
+		},
+		{
+			"Path": "client/srm_speedometer.nut",
 			"RunOn": "CLIENT && SP",
 		},
 
