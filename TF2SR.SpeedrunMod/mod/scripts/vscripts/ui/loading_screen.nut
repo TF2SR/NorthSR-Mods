@@ -16,7 +16,7 @@ void function LoadingScreen()
         var timeLabel = null
         try
         {
-            loadingMenu = Hud_GetChild(Hud_GetParent(GetMenu("ModSettings")), "LoadingProgress")
+            loadingMenu = Hud_GetChild(Hud_GetParent(GetMenu("SRM_SettingsMenu")), "LoadingProgress")
             //mapLabel = Hud_GetChild(loadingMenu, "")
             timeLabel = Hud_GetChild(loadingMenu, "UnixTimestamp")
         }
