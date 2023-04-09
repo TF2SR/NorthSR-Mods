@@ -44,6 +44,13 @@
 		}
 	],
 	"Scripts": [
+        {
+            "Path": "ui/loading_screen.nut",
+            "RunOn": "UI",
+            "UICallback": {
+                "After": "LoadingScreen_Init"
+            }
+        },
 		{
 			"Path": "ui/srm_ui_utils.nut",
 			"RunOn": "UI"
