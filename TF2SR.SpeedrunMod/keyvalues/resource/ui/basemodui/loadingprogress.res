@@ -16,9 +16,5 @@
 		fgcolor_override 		"255 255 255 255"
 		bgcolor_override 		"0 0 0 200"
 		font					Default_34_ShadowGlow
-
-		pin_to_sibling			OutOfBoundsWarning_Message
-		pin_corner_to_sibling	TOP
-		pin_to_sibling_corner	BOTTOM
 	}
 }
