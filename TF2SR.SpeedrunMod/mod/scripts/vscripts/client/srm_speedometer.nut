@@ -2,51 +2,107 @@ global function SRM_Speedometer_Init
 
 struct
 {
-	var rui = null
-	bool useMetric = true
+	var speedometer = null
+	var speedometerUnit = null
 } file
 
 void function SRM_Speedometer_Init()
 {
-	// 0 = metric, 1 = imperial
-	// NOTE: needs to be rewritten if we decide to add game units as a measurement unit
-	file.useMetric = GetConVarInt("srm_speedometer_unit") == 0
-
 	if (GetConVarInt("srm_enable_speedometer") == 1) {
 		AddCreatePilotCockpitCallback( SRM_CreateSpeedometer )
 	} else return
 
-	var player = GetLocalClientPlayer()
-
-	// RuiSetString( file.rui, "msgText", GetLocalClientPlayer().GetVelocity().tostring() )
+	AddCallback_EntitiesDidLoad( SRM_SpeedometerUpdate )
 }
 
 void function SRM_CreateSpeedometer( entity cockpit, entity player )
 {
-	file.rui = CreatePermanentCockpitRui( $"ui/cockpit_console_text_top_left.rpak" )
-    RuiSetString( file.rui, "msgText", "hello" )
-    RuiSetFloat2( file.rui, "msgPos", <0.5,0.5,0.0> )
-    RuiSetFloat( file.rui, "msgFontSize", 40 )
-    RuiSetFloat( file.rui, "msgAlpha", 1.0 )
-    RuiSetFloat3( file.rui, "msgColor", <0.0,1.0,0.7> )
+	// value display
+	file.speedometer = CreatePermanentCockpitRui( $"ui/cockpit_console_text_top_left.rpak" )
+    RuiSetFloat2( file.speedometer, "msgPos",
+    	<
+    	GetConVarFloat("srm_speedometer_position_x"),
+    	GetConVarFloat("srm_speedometer_position_y"),
+    	0.0
+    	>
+    )
+    RuiSetFloat( file.speedometer, "msgFontSize", 45 )
+    RuiSetFloat( file.speedometer, "msgAlpha", GetConVarFloat("srm_speedometer_alpha") )
+    RuiSetFloat3( file.speedometer, "msgColor", <1.0,1.0,1.0> )
 
-	player.EndSignal( "OnDeath" )
-
-	OnThreadEnd(
-		function() : (  )
-		{
-			SRM_DestroySpeedometer()
-		}
-	)
-
-	WaitForever()
+    // unit label
+    file.speedometerUnit = CreatePermanentCockpitRui( $"ui/cockpit_console_text_top_left.rpak" )
+    RuiSetFloat2( file.speedometerUnit, "msgPos",
+    	<
+    	GetConVarFloat("srm_speedometer_position_x"),
+    	GetConVarFloat("srm_speedometer_position_y") + 0.04,
+    	0.0
+    	>
+    )
+    RuiSetFloat( file.speedometerUnit, "msgFontSize", 20 )
+    RuiSetFloat( file.speedometerUnit, "msgAlpha", GetConVarFloat("srm_speedometer_alpha") )
+    RuiSetFloat3( file.speedometerUnit, "msgColor", <1.0,1.0,1.0> )
 }
 
+void function SRM_SpeedometerUpdate()
+{
+	float unitConversionModifier
+	string speedometerUnitLabel
+	switch ( GetConVarInt("srm_speedometer_unit") )
+	{
+		case 0: // metric 	(km/h)
+			unitConversionModifier = 0.090
+			speedometerUnitLabel = "km/h"
+			break
+		case 1: // imperial (mph)
+			unitConversionModifier = 0.056
+			speedometerUnitLabel = "mph"
+			break
+		case 2: // units 	(u)
+			unitConversionModifier = 1.000
+			speedometerUnitLabel = "u"
+			break
+	}
+
+	RuiSetString( file.speedometerUnit, "msgText", speedometerUnitLabel )
+
+	vector speedometerVelocityVector
+	float  speedometerVelocity
+	while (true)
+	{
+		WaitFrame()
+
+		speedometerVelocityVector = GetLocalClientPlayer().GetVelocity()
+		if ( GetConVarInt("srm_speedometer_include_z") == 1 )
+			speedometerVelocity = speedometerVelocityVector.Length()
+		else
+			speedometerVelocity = speedometerVelocityVector.Length2D() // Length2D only takes the X&Y axes
+
+		// update color depending on speed (lerp between 0 - 1000 u)
+		RuiSetFloat3( file.speedometer, "msgColor", SRM_SpeedometerColorLerp( speedometerVelocity ) )
+		RuiSetFloat3( file.speedometerUnit, "msgColor", SRM_SpeedometerColorLerp( speedometerVelocity ) )
+		speedometerVelocity *= unitConversionModifier
+		// cut off decimals and then convert to string
+		RuiSetString( file.speedometer, "msgText", speedometerVelocity.tointeger().tostring() )
+	}
+}
+
+vector function SRM_SpeedometerColorLerp(float speedometerVelocity)
+{
+	// there's probably a much better way of doing this by storing the convars as an actual vector but idk how :[
+	return <
+	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_r"), GetConVarFloat("srm_speedometer_color_fast_r") ),
+	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_g"), GetConVarFloat("srm_speedometer_color_fast_g") ),
+	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_b"), GetConVarFloat("srm_speedometer_color_fast_b") )
+	>
+}
+
+// unused
 void function SRM_DestroySpeedometer()
 {
-	if ( file.rui == null )
+	if ( file.speedometer == null )
 		return
 
-	RuiDestroyIfAlive( file.rui )
-	file.rui = null
+	RuiDestroyIfAlive( file.speedometer )
+	file.speedometer = null
 }
