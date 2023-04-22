@@ -7,15 +7,40 @@ struct
 	var itemDescriptionBox
 } file
 
+string colorDescription = "Individual color components.\nThe color will interpolate between the slow & fast components depending on your speed.\n\nFor nerds:\n`1slow`0 is 0\n`1fast`0 is 1000u / 90km/h / 56mph"
+
 void function SRM_InitSpeedometerSettingsMenu()
 {
 	var menu = GetMenu( "SRM_SpeedometerSettingsMenu" )
 	file.menu = menu
 	file.itemDescriptionBox = Hud_GetChild( menu, "LblMenuItemDescription" )
 
-	SetupButton( Hud_GetChild( menu, "SwchSpeedometerUnit"), "Unit", "Determines the measuring unit used for displaying the speed (kph/mph)")
-	SetupButton( Hud_GetChild( menu, "SwchSpeedometerIncludeZ"), "Include Z axis", "Include the Z axis in the speed calculation or only the horizontal plane")
-	SetupButton( Hud_GetChild( menu, "SwchSpeedometerFadeout"), "Fadeout", "Fade out the speedometer when moving at low speeds")
+	var button = Hud_GetChild( menu, "SwchSpeedometerUnit" )
+	SetupButton( button, "Unit", "Determines the measuring unit used for displaying the speed (kph/mph/u)\n\n`2Requires a reload for changes to take effect")
+	button = Hud_GetChild( menu, "SwchSpeedometerIncludeZ" )
+	SetupButton( button, "Include Z axis", "Include the Z axis in the speed calculation or only the horizontal plane")
+
+	button = Hud_GetChild( menu, "SldSpeedometerPositionX" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Position X", "Horizontal position of the Speedometer.\n`10.0`0 = Left\n`11.0`0 = Right\n\n`2Requires a reload for changes to take effect" )
+	button = Hud_GetChild( menu, "SldSpeedometerPositionY" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Position Y", "Vertical position of the Speedometer.\n`10.0`0 = Top\n`11.0`0 = Bottom\n\n`2Requires a reload for changes to take effect" )
+
+	button = Hud_GetChild( menu, "SldSpeedometerColorSlowR" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Color R (slow)", colorDescription )
+	button = Hud_GetChild( menu, "SldSpeedometerColorSlowG" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Color G (slow)", colorDescription )
+	button = Hud_GetChild( menu, "SldSpeedometerColorSlowB" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Color B (slow)", colorDescription )
+
+	button = Hud_GetChild( menu, "SldSpeedometerColorFastR" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Color R (fast)", colorDescription )
+	button = Hud_GetChild( menu, "SldSpeedometerColorFastG" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Color G (fast)", colorDescription )
+	button = Hud_GetChild( menu, "SldSpeedometerColorFastB" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Color B (fast)", colorDescription )
+
+	button = Hud_GetChild( menu, "SldSpeedometerAlpha" )
+	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Alpha", "Transparency of the Speedometer.\n`11.0`0 = Fully opaque\n`10.0`0 = Fully transparent" )
 
 	AddEventHandlerToButtonClass( menu, "RuiFooterButtonClass", UIE_GET_FOCUS, FooterButton_Focused )
 	AddMenuFooterOption( menu, BUTTON_A, "#A_BUTTON_SELECT" )

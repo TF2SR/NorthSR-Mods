@@ -112,8 +112,6 @@ ConVarDisplay function CreateConVarDisplay( vector position, float fontSize, vec
     rui = CreateFullscreenRui( $"ui/cockpit_console_text_top_left.rpak" )
     RuiSetResolution( rui, screenSize[0], screenSize[1])
     RuiSetString( rui, "msgText", "" )
-    // RuiSetInt( rui, "maxLines", 1 )
-    // RuiSetInt( rui, "lineNum", 1 )
     RuiSetFloat2( rui, "msgPos", position )
     RuiSetFloat( rui, "msgFontSize", fontSize )
     RuiSetFloat( rui, "msgAlpha", alpha )

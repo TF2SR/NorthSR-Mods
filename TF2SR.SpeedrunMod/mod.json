@@ -4,6 +4,7 @@
 	"Version": "0.0.1",
 	"LoadPriority": 0,
 	"ConVars": [
+		// Speedometer
 		{
 			"Name": "srm_enable_speedometer",
 			"DefaultValue": "0",
@@ -19,11 +20,55 @@
 			"DefaultValue": "0",
 			"Flags": 16777216
 		},
+
+		// Speedometer Customization
 		{
-			"Name": "srm_speedometer_fadeout",
-			"DefaultValue": "0",
+			"Name": "srm_speedometer_position_x",
+			"DefaultValue": "0.5",
 			"Flags": 16777216
 		},
+		{
+			"Name": "srm_speedometer_position_y",
+			"DefaultValue": "0.5",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_color_slow_r",
+			"DefaultValue": "1.0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_color_slow_g",
+			"DefaultValue": "1.0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_color_slow_b",
+			"DefaultValue": "1.0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_color_fast_r",
+			"DefaultValue": "1.0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_color_fast_g",
+			"DefaultValue": "0.0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_color_fast_b",
+			"DefaultValue": "0.0",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_speedometer_alpha",
+			"DefaultValue": "1.0",
+			"Flags": 16777216
+		},
+
+		// Utility
 		{
 			"Name": "srm_enable_mp",
 			"DefaultValue": "1",
@@ -38,10 +83,6 @@
 			"Name": "srm_practice_mode",
 			"DefaultValue": "0",
 		},
-		{
-			"Name": "srm_test",
-			"DefaultValue": "0",
-		}
 	],
 	"Scripts": [
         {
@@ -76,6 +117,10 @@
 		},
 		{
 			"Path": "client/srm_infohud.nut",
+			"RunOn": "CLIENT && SP",
+		},
+		{
+			"Path": "client/srm_speedometer.nut",
 			"RunOn": "CLIENT && SP",
 		},
 
