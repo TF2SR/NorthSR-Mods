@@ -1,0 +1,27 @@
+{
+	"Name": "Singleplayer Debug Mode",
+	"Description": ". .\n---",
+	"LoadPriority": 6,
+	"RequiredOnClient": false,
+	"Version": "0.1.0",
+    "Scripts": [
+        {
+            "Path": "cl_debug_mode.nut",
+            "RunOn": "CLIENT && SP",
+            "ClientCallback": {
+                "After": "Cl_DebugMode_Init"
+            }
+        },
+        {
+            "Path": "_debug_mode.nut",
+            "RunOn": "SERVER && SP"
+        },
+        {
+            "Path": "sp/sh_start_points.nut",
+            "RunOn": "CLIENT && SP",
+            "ClientCallback": {
+                "Before": "InitSharedStartPoints"
+            }
+        }
+    ]
+}
