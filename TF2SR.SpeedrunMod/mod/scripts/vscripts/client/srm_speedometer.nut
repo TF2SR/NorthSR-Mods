@@ -8,14 +8,13 @@ struct
 
 void function SRM_Speedometer_Init()
 {
-	if (GetConVarInt("srm_enable_speedometer") == 1) {
-		AddCreatePilotCockpitCallback( SRM_CreateSpeedometer )
-	} else return
-
+	if (GetConVarInt("srm_enable_speedometer") != 1) return
+	
+	SRM_CreateSpeedometer()
 	AddCallback_EntitiesDidLoad( SRM_SpeedometerUpdate )
 }
 
-void function SRM_CreateSpeedometer( entity cockpit, entity player )
+void function SRM_CreateSpeedometer()
 {
 	// value display
 	file.speedometer = CreatePermanentCockpitRui( $"ui/cockpit_console_text_top_left.rpak" )
