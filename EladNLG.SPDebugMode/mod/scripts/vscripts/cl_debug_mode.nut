@@ -57,6 +57,10 @@ void function Cl_DebugMode_Init()
     file.objectiveCallbacks["tdayWaves"] <- Objective_TDayWaves
     file.objectiveCallbacks["maltaGunGroup"] <- Objective_MaltaGunGroup
     file.objectiveCallbacks["hangarEnemyWave"] <- Objective_HangarEnemyWave
+    file.objectiveCallbacks["beacon2Triggers"] <- Objective_Beacon2Triggers
+    file.objectiveCallbacks["hubFight"] <- Objective_HubFight
+    file.objectiveCallbacks["becaon3FinalFight"] <- Objective_Beacon3FinalFight
+    file.objectiveCallbacks["b3Triggers"] <- Objective_Beacon3Triggers
 
     // TITLE
     var rui = RuiCreate( RUI_TEXT_CENTER, clGlobal.topoCockpitHud, RUI_DRAW_COCKPIT, 0 )
@@ -330,6 +334,21 @@ void function AddObjectiveCallback( string objType, void functionref( Objective 
     file.objectiveCallbacks[objType] <- callback
 }
 
+
+void function ServerCallback_SetStartPointIndex( int index )
+{
+    printt("\nSETSTARTPOINTINDEX", index)
+    file.startPointIndex = index
+}
+
+void function WaitUntilComplete( Objective obj )
+{
+    while ( !obj.isComplete )
+    {
+        WaitFrame()
+    }
+}
+
 void function Objective_WaitForEnemyCount( Objective obj )
 {
     obj.displayType = ObjectiveDisplayType.EITHER_OR
@@ -414,16 +433,80 @@ void function Objective_HangarEnemyWave( Objective obj )
     }
 }
 
-void function ServerCallback_SetStartPointIndex( int index )
+void function Objective_Beacon2Triggers( Objective obj )
 {
-    printt("\nSETSTARTPOINTINDEX", index)
-    file.startPointIndex = index
+    obj.topLabel = "status"
+    while (!obj.isComplete)
+    {
+        int progress = int(obj.progress)
+        int maxProgress = int(obj.maxProgress)
+        switch (progress)
+        {
+            case 0:
+                obj.topLabel = "go to fightroom"
+                break
+            case 1:
+                obj.bottomLabel = "hellroom skip time :3"
+                break
+            case 2:
+                obj.bottomLabel = "fuck the mrvn"
+                break
+            case 3:
+                obj.bottomLabel = "get to fans"
+                break
+            case 4:
+                obj.bottomLabel = "fans"
+                break
+            case 5:
+                obj.bottomLabel = "weeeeeeeeeeee"
+                break
+            case 6:
+                obj.bottomLabel = "fzzyfans or die"
+                break
+        }
+        WaitFrame()
+    }
 }
 
-void function WaitUntilComplete( Objective obj )
+void function Objective_HubFight( Objective obj )
 {
-    while ( !obj.isComplete )
+    obj.topLabel = "please wait.."
+    while (!obj.isComplete)
     {
+        if (obj.maxProgress > 0)
+        {
+            float timeUntilCleanup = obj.maxProgress - Time()
+            if (timeUntilCleanup > 0)
+            {
+                obj.topLabel = "Cleanup in 0:" + int(ceil(timeUntilCleanup))
+            }
+            else
+            {
+                obj.topLabel = "Cleanup in progress"
+            }
+            obj.bottomLabel = int( obj.progress ) + " remain"
+        }
+        else obj.bottomLabel = "spawning enemies..."
+        WaitFrame()
+    }
+}
+
+void function Objective_Beacon3FinalFight( Objective obj )
+{
+    obj.topLabel = "Kill all enemies"
+    while (!obj.isComplete)
+    {
+        obj.bottomLabel = int(obj.progress) + " remain"
+        WaitFrame()
+    }
+}
+
+void function Objective_Beacon3Triggers( Objective obj )
+{
+    obj.topLabel = "Triggers hit"
+    while (!obj.isComplete)
+    {
+        obj.bottomLabel = format( "%i of %i", int(obj.progress), int(obj.maxProgress) )
         WaitFrame()
     }
 }

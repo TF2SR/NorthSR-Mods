@@ -7207,7 +7207,7 @@ void function MaltaGunsKillEvents( string guyNames, array<string> spectreNames, 
         WaitFrame()
     }
 
-    DebugMode_SetComplete( guyNames, true )
+    DebugMode_SetComplete( guyNames )
 
 	FlagSet( killFlag )
 }
@@ -9147,7 +9147,7 @@ void function DebugMode_DeadOrLeechedObjective( string group, array<entity> entA
             break
     }
 
-    DebugMode_SetComplete( group, true )
+    DebugMode_SetComplete( group )
 }
 
 void function MaltaHangar_FightMusic()

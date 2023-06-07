@@ -2289,7 +2289,7 @@ void function IntroBattleThink( entity player )
 	printt( "------------" )
 
 	// we done here.
-	DebugMode_SetComplete( objectiveId, true )
+	DebugMode_SetComplete( objectiveId )
 
 	CheckPoint()
 	SetIdealFriendlyTitanCount( 2 )
