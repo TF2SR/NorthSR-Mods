@@ -17,8 +17,8 @@ void function SRM_InitSpeedometerSettingsMenu()
 
 	var button = Hud_GetChild( menu, "SwchSpeedometerUnit" )
 	SetupButton( button, "Unit", "Determines the measuring unit used for displaying the speed (kph/mph/u)\n\n`2Requires a reload for changes to take effect")
-	button = Hud_GetChild( menu, "SwchSpeedometerIncludeZ" )
-	SetupButton( button, "Include Z axis", "Include the Z axis in the speed calculation or only the horizontal plane")
+	button = Hud_GetChild( menu, "SwchSpeedometerAxisMode" )
+	SetupButton( button, "Axis Mode", "Determine which axes the speedometer should measure")
 
 	button = Hud_GetChild( menu, "SldSpeedometerPositionX" )
 	SetupButton( Hud_GetChild( button, "BtnDropButton" ), "Position X", "Horizontal position of the Speedometer.\n`10.0`0 = Left\n`11.0`0 = Right\n\n`2Requires a reload for changes to take effect" )

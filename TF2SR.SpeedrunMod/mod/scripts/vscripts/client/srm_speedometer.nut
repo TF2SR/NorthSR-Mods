@@ -72,10 +72,21 @@ void function SRM_SpeedometerUpdate()
 		WaitFrame()
 
 		speedometerVelocityVector = GetLocalClientPlayer().GetVelocity()
-		if ( GetConVarInt("srm_speedometer_include_z") == 1 )
-			speedometerVelocity = speedometerVelocityVector.Length()
-		else
-			speedometerVelocity = speedometerVelocityVector.Length2D() // Length2D only takes the X&Y axes
+
+		switch ( GetConVarInt("srm_speedometer_axismode") )
+		{
+			// XY
+			case 0: speedometerVelocityVector = < speedometerVelocityVector.x, speedometerVelocityVector.y, 0.0 >
+			break
+			// XYZ
+			case 1: // redundant since the other cases just eliminate axes to ignore
+			break
+			// Z
+			case 2: speedometerVelocityVector = < 0.0, 0.0, speedometerVelocityVector.z >
+			break
+		}
+
+		speedometerVelocity = speedometerVelocityVector.Length()
 
 		// update color depending on speed (lerp between 0 - 1000 u)
 		RuiSetFloat3( file.speedometer, "msgColor", SRM_SpeedometerColorLerp( speedometerVelocity ) )

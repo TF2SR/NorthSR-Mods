@@ -16,7 +16,7 @@
 			"Flags": 16777216
 		},
 		{
-			"Name": "srm_speedometer_include_z",
+			"Name": "srm_speedometer_axismode",
 			"DefaultValue": "0",
 			"Flags": 16777216
 		},
