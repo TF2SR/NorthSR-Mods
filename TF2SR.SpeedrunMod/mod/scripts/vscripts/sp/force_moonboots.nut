@@ -10,11 +10,15 @@ void function ForceMoonboots()
     bool hasMoonboots
     while (1)
     {
+        WaitFrame()
+        if (GetPlayerArray().len() < 1)
+            continue
+
         if (GetConVarBool("srm_force_moonboots"))
         {
-                hasMoonboots = true
-                // this is the value used for moonboots, checked by testing
-                GetFirstPlayer().kv.gravityScale = 0.75
+            hasMoonboots = true
+            // this is the value used for moonboots, checked by testing
+            GetFirstPlayer().kv.gravityScale = 0.75
         }
         else if (hasMoonboots)
         {
@@ -24,6 +28,5 @@ void function ForceMoonboots()
             // are multiplicative, not overriding each other.
             GetFirstPlayer().kv.gravityScale = 0.0
         }
-        WaitFrame()
     }
 }
