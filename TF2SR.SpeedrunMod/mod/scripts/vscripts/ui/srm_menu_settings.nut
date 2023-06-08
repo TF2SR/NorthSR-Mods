@@ -39,6 +39,11 @@ void function SRM_InitSettingsMenu()
 			),
 		UIE_CLICK, SRM_ClickedPracticeMode
 	)
+	SetupButton(
+		Hud_GetChild( menu, "SwchForceMoonboots"),
+		"Forced Moonboots",
+		"`2NOT LEADERBOARD LEGAL!\n\n`1Forces moonboots."
+		)
 	AddButtonEventHandler(
 		SetupButton(
 			Hud_GetChild( menu, "BtnPracticeWarps" ),
