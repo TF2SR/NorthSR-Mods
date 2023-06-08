@@ -60,13 +60,14 @@ void function Cl_DebugMode_Init()
     file.objectiveCallbacks["beacon2Triggers"] <- Objective_Beacon2Triggers
     file.objectiveCallbacks["hubFight"] <- Objective_HubFight
     file.objectiveCallbacks["becaon3FinalFight"] <- Objective_Beacon3FinalFight
+    file.objectiveCallbacks["endless"] <- Objective_EndlessBT
     file.objectiveCallbacks["b3Triggers"] <- Objective_Beacon3Triggers
 
     // TITLE
     var rui = RuiCreate( RUI_TEXT_CENTER, clGlobal.topoCockpitHud, RUI_DRAW_COCKPIT, 0 )
     RuiSetInt( rui, "maxLines", 1 )
     RuiSetInt( rui, "lineNum", 0 )
-    RuiSetFloat2( rui, "msgPos", <0.35, -0.4, 0> )
+    RuiSetFloat2( rui, "msgPos", <0.35, -0.4 + 0.3, 0> )
     RuiSetFloat3( rui, "msgColor", WHITE )
      RuiSetString( rui, "msgText", "Part X of Y" )
     RuiSetFloat( rui, "msgFontSize", 18.0 )
@@ -77,7 +78,7 @@ void function Cl_DebugMode_Init()
     rui = RuiCreate( RUI_TEXT_CENTER, clGlobal.topoCockpitHud, RUI_DRAW_COCKPIT, 0 )
     RuiSetInt( rui, "maxLines", 1 )
     RuiSetInt( rui, "lineNum", 0 )
-    RuiSetFloat2( rui, "msgPos", <0.35, -0.375, 0> )
+    RuiSetFloat2( rui, "msgPos", <0.35, -0.375 + 0.3, 0> )
     RuiSetFloat3( rui, "msgColor", WHITE )
     RuiSetString( rui, "msgText", "PART TITLE" )
     RuiSetFloat( rui, "msgFontSize", 36.0 )
@@ -88,7 +89,7 @@ void function Cl_DebugMode_Init()
     // OBJECTIVE 1
     for (int i = 0; i < 3; i++)
     {
-        float offset = 0.07 * i
+        float offset = 0.3 + 0.07 * i
         ObjectiveDisplay d
         rui = RuiCreate( RUI_TEXT_CENTER, clGlobal.topoCockpitHud, RUI_DRAW_COCKPIT, 0 )
         RuiSetInt( rui, "maxLines", 1 )
@@ -470,7 +471,7 @@ void function Objective_Beacon2Triggers( Objective obj )
 
 void function Objective_HubFight( Objective obj )
 {
-    obj.topLabel = "please wait.."
+    obj.topLabel = "spawning enemies..."
     while (!obj.isComplete)
     {
         if (obj.maxProgress > 0)
@@ -484,9 +485,9 @@ void function Objective_HubFight( Objective obj )
             {
                 obj.topLabel = "Cleanup in progress"
             }
-            obj.bottomLabel = int( obj.progress ) + " remain"
         }
-        else obj.bottomLabel = "spawning enemies..."
+        else obj.topLabel = "spawning enemies..."
+        obj.bottomLabel = int( obj.progress ) + " remain"
         WaitFrame()
     }
 }
@@ -507,6 +508,19 @@ void function Objective_Beacon3Triggers( Objective obj )
     while (!obj.isComplete)
     {
         obj.bottomLabel = format( "%i of %i", int(obj.progress), int(obj.maxProgress) )
+        WaitFrame()
+    }
+}
+
+
+void function Objective_EndlessBT( Objective obj )
+{
+    obj.topLabel = "Endless fight status"
+    while (!obj.isComplete)
+    {
+        if (obj.maxProgress == 0.0)
+            obj.bottomLabel = format( "Ongoing | %i", int(obj.progress) )
+        else obj.bottomLabel = format( "0:%02i | %i", int(ceil(obj.maxProgress - Time())), int(obj.progress) )
         WaitFrame()
     }
 }

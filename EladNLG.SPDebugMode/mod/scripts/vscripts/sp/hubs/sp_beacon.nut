@@ -1048,7 +1048,7 @@ void function CraneDishMarvinWelds( entity marvin, entity node )
 //	███████║██║     ╚██████╔╝██║  ██╗███████╗     ██║    ██║     ██║  ██║██║ ╚████║███████╗███████╗███████║
 //	╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝╚══════╝
 
-void function StartPoint_Spoke1_Panels( entity player )
+void function StartPoint_Spoke1_Panels( entity player )	
 {
 	printt( "START POINT - SPOKE 1 PANELS" )
 
@@ -2135,6 +2135,7 @@ void function HubBattleEndlessBTEnemies( entity player )
 	bt.AssaultPoint( OriginToGround( node.GetOrigin() + <0,0,1> ) )
 	bt.AssaultSetGoalRadius( 800 )
 
+	DebugMode_CreateObjective( "endless", "endless", 0, 0 )
 	array<entity> endlessSpawners = GetEntArrayByScriptName( "HubFightEndlessSpawner" )
 	array<entity> endlessGuys
 	float spawnersStopTime = 0.0
@@ -2151,6 +2152,7 @@ void function HubBattleEndlessBTEnemies( entity player )
 				printt( "#########################################" )
 				printt( "STOPPING ENDLESS BT ENEMIES IN 60 SECONDS" )
 				printt( "#########################################" )
+				DebugMode_SetMaxProgress( "endless", Time() + 60.0 )
 			}
 			if ( Flag( "ReturnedToBeacon" ) )
 			{
@@ -2172,6 +2174,8 @@ void function HubBattleEndlessBTEnemies( entity player )
 		// Max 2 enemies at a time to keep a light battle going with BT
 		ArrayRemoveDead( endlessGuys )
 		ArrayRemoveDead( file.returnToHubEnemies )
+		DebugMode_SetProgress( "endless", endlessGuys.len() )
+		EmitSoundOnEntity( GetPlayerArray()[0], "HUD_match_start_timer_tick_1P" )
 		if ( endlessGuys.len() >= 2 )
 			continue
 
@@ -2182,6 +2186,7 @@ void function HubBattleEndlessBTEnemies( entity player )
 		endlessGuys.append( guy )
 		AddTrackedHubFightEnemy( guy )
 	}
+	DebugMode_SetComplete( "endless" )
 }
 
 void function AddTrackedHubFightEnemy( entity guy )
@@ -2207,6 +2212,7 @@ void function HubBattleBeforeFastballToDish( entity player )
 	thread HubBattleContextDialogue( player )
 
 	DebugMode_CreateObjective( "hub_fight", "hubFight", 0, -1 )
+	thread DebugMode_TrackEnemyArray( "hub_fight", file.returnToHubEnemies )
 	FlagWait( "AllDelayedHubEnemiesSpawned" )
 	DebugMode_SetMaxProgress( "hub_fight", Time() + 45.0 )
 
@@ -2215,8 +2221,8 @@ void function HubBattleBeforeFastballToDish( entity player )
 	while ( file.returnToHubEnemies.len() > 0 )
 	{
 		wait 1.0
+		EmitSoundOnEntity( GetPlayerArray()[0], "HUD_match_start_timer_5_seconds_1P" )
 		ArrayRemoveDead( file.returnToHubEnemies )
-		DebugMode_SetProgress( "hub_fight", file.returnToHubEnemies.len() )
 	}
 	DebugMode_SetComplete( "hub_fight" )
 
