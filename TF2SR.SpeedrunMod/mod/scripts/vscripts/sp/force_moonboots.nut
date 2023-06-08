@@ -10,7 +10,7 @@ void function ForceMoonboots()
     bool hasMoonboots
     while (1)
     {
-        if (GetConVarBool("srm_practice_mode") && GetConVarBool("srm_force_moonboots"))
+        if (GetConVarBool("srm_force_moonboots"))
         {
                 hasMoonboots = true
                 // this is the value used for moonboots, checked by testing
