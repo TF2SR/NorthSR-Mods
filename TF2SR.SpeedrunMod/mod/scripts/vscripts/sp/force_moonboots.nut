@@ -24,5 +24,6 @@ void function ForceMoonboots()
             // are multiplicative, not overriding each other.
             GetFirstPlayer().kv.gravityScale = 0.0
         }
+        WaitFrame()
     }
 }
