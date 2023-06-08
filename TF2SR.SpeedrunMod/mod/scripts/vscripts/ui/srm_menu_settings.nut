@@ -29,7 +29,8 @@ void function SRM_InitSettingsMenu()
 	)
 	SetupButton( Hud_GetChild( menu, "SwchShowFPS"), "Show FPS", "`1FPS: `0Shows a large overlay with FPS and server tickrate\n\n`1FPS/Graph: `0Shows a large FPS overlay and performance graph")
 	SetupButton( Hud_GetChild( menu, "SwchShowPos"), "Show Position", "`1Player Position: `0Shows position, angle and velocity from the player model\n\n`1Camera Position: `0Shows position, angle and velocity from the player camera")
-	
+	SetupButton( Hud_GetChild( menu, "SwchInputDisplay"), "Input Display", "`1Movement Input Display: `0Shows your WASD, jump and crouch inputs on your screen around your crosshair.\n\nRecommended for run submissions")
+
 	// Practice Tools
 	AddButtonEventHandler(
 		SetupButton(
