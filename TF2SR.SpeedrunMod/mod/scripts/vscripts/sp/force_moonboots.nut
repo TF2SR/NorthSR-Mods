@@ -18,7 +18,7 @@ void function ForceMoonboots()
         {
             hasMoonboots = true
             // this is the value used for moonboots, checked by testing
-            GetFirstPlayer().kv.gravityScale = 0.75
+            GetFirstPlayer().kv.gravity = 0.75
         }
         else if (hasMoonboots)
         {
@@ -26,7 +26,7 @@ void function ForceMoonboots()
             // note: the reason we don't use player.GetPlayerSettingsField( "gravityScale" )
             // is because that's the cause of the bug. .kv.gravityScale and gravityScale
             // are multiplicative, not overriding each other.
-            GetFirstPlayer().kv.gravityScale = 0.0
+            GetFirstPlayer().kv.gravity = 0.0
         }
     }
 }
