@@ -120,10 +120,10 @@
 			"RunOn": "SERVER && SP",
 		},
 		{
-			"Path": "sp/force_moonboots.nut",
+			"Path": "sp/srm_force_moonboots.nut",
 			"RunOn": "SERVER && SP",
 			"ServerCallback": {
-				"After": "ForceMoonboots_Init"
+				"After": "SRM_ForceMoonboots_Init"
 			}
 		},
 		{

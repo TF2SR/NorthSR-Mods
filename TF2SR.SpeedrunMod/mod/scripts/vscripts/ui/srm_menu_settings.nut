@@ -41,8 +41,8 @@ void function SRM_InitSettingsMenu()
 	)
 	SetupButton(
 		Hud_GetChild( menu, "SwchForceMoonboots"),
-		"Forced Moonboots",
-		"`2NOT LEADERBOARD LEGAL!\n\n`1Forces moonboots."
+		"Force Moonboots",
+		"`2NOT LEADERBOARD LEGAL!\n\n`1Forcefully enables moonboots."
 		)
 	AddButtonEventHandler(
 		SetupButton(
