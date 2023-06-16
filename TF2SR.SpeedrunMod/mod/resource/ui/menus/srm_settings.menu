@@ -175,11 +175,27 @@ resource/ui/menus/srm_settings.menu
 			pin_to_sibling_corner	BOTTOM_LEFT
 		}
 
+		SwchForceMoonboots
+		{
+			ControlName				RuiButton
+			InheritProperties		SwitchButton
+			style					DialogListButton
+			ConVar					"srm_force_moonboots"
+			list
+			{
+				"#SETTING_ENABLED"	1
+				"#SETTING_DISABLED" 0
+			}
+			pin_to_sibling			SwchPracticeMode
+			pin_corner_to_sibling	TOP_LEFT
+			pin_to_sibling_corner	BOTTOM_LEFT
+		}
+
 		BtnPracticeWarps
 		{
 			ControlName				RuiButton
 			InheritProperties		WideButton
-			pin_to_sibling			SwchPracticeMode
+			pin_to_sibling			SwchForceMoonboots
 			pin_corner_to_sibling	TOP_LEFT
 			pin_to_sibling_corner	BOTTOM_LEFT
 		}
@@ -192,7 +208,7 @@ resource/ui/menus/srm_settings.menu
 			ControlName				ImagePanel
 			InheritProperties		SubheaderBackground
 			xpos					96
-			ypos					570
+			ypos					600
 		}
 		LblUtilitySubheaderText
 		{

@@ -32,6 +32,7 @@ void function SRM_InfoHUD_Init()
     RegisterConVar( "srm_practice_mode", 0.0, "Practice Mode" )
     RegisterConVar( "sv_cheats", 0.0 )
     RegisterConVar( "host_timescale", 1.0 )
+    RegisterConVar( "srm_force_moonboots", 0.0, "Forced Moonboots" )
     RegisterConVar( "player_respawnInputDebounceDuration", 0.5 )
 
     screenSize = GetScreenSize()
