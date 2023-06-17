@@ -104,11 +104,27 @@ resource/ui/menus/srm_settings.menu
 			pin_to_sibling_corner	BOTTOM_LEFT
 		}
 
+		SwchInputDisplay
+		{
+			ControlName				RuiButton
+			InheritProperties		SwitchButton
+			xpos 					22
+			style					DialogListButton
+			ConVar					"srm_enable_input_display"
+			list
+			{
+				"#SETTING_OFF"		0
+				"#SETTING_ON"		1
+			}
+			pin_to_sibling			BtnSpeedometerSettings
+			pin_corner_to_sibling	TOP_LEFT
+			pin_to_sibling_corner	BOTTOM_LEFT
+		}
+
 		SwchShowFPS
 		{
 			ControlName				RuiButton
 			InheritProperties		SwitchButton
-			xpos					22
 			style					DialogListButton
 			ConVar					"showfps_enabled"
 			list
@@ -117,7 +133,7 @@ resource/ui/menus/srm_settings.menu
 				"FPS"	    		1
 				"FPS/Graph"     	2
 			}
-			pin_to_sibling			BtnSpeedometerSettings
+			pin_to_sibling			SwchInputDisplay
 			pin_corner_to_sibling	TOP_LEFT
 			pin_to_sibling_corner	BOTTOM_LEFT
 		}
@@ -135,22 +151,6 @@ resource/ui/menus/srm_settings.menu
 				"Player Position"  	2
 			}
 			pin_to_sibling			SwchShowFPS
-			pin_corner_to_sibling	TOP_LEFT
-			pin_to_sibling_corner	BOTTOM_LEFT
-		}
-
-		SwchInputDisplay
-		{
-			ControlName				RuiButton
-			InheritProperties		SwitchButton
-			style					DialogListButton
-			ConVar					"srm_input_display"
-			list
-			{
-				"#SETTING_OFF"		0
-				"#SETTING_ON"		1
-			}
-			pin_to_sibling			SwchShowPos
 			pin_corner_to_sibling	TOP_LEFT
 			pin_to_sibling_corner	BOTTOM_LEFT
 		}

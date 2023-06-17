@@ -14,7 +14,7 @@ array<var> inputDisplays = []
 
 void function SRM_InputDisplay_Init()
 {
-	// if ( !GetConVarInt("srm_input_display") ) return
+	if ( !GetConVarInt("srm_enable_input_display") ) return
 
 	AddCallback_EntitiesDidLoad( SRM_SetupInputDisplay )
 	AddCallback_EntitiesDidLoad( SRM_InputDisplayUpdate )

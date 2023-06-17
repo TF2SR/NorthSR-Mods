@@ -77,8 +77,8 @@
 		ControlName 		ImagePanel
 		xpos 				-48
 		ypos 				-80
-		wide 				24
-		tall 				24
+		wide 				32	
+		tall 				32	
 		image 				"vgui/hud/input_arrow_up"
 		visible 			0
 		scaleImage 			1
@@ -92,8 +92,8 @@
 		ControlName 		ImagePanel
 		xpos 				48
 		ypos 				-80
-		wide 				24
-		tall 				24
+		wide 				32	
+		tall 				32	
 		image 				"vgui/hud/input_arrow_down"
 		visible 			0
 		scaleImage 			1

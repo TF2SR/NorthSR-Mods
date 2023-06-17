@@ -68,8 +68,9 @@
 			"Flags": 16777216
 		},
 
+
 		{
-			"Name": "srm_input_display",
+			"Name": "srm_enable_input_display",
 			"DefaultValue": "0",
 			"Flags": 16777216
 		},
