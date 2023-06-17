@@ -134,7 +134,6 @@
 			"RunOn": "CLIENT && SP",
 		},
 
-
 		{
 			"Path": "ui/srm_menu_practicewarps.nut",
 			"RunOn": "UI",
