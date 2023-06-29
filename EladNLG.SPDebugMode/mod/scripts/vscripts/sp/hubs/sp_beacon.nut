@@ -559,6 +559,7 @@ void function StartPoint_Setup_FastballToSpoke1( entity player )
 
 void function StartPoint_Skipped_FastballToSpoke1( entity player )
 {
+	DebugMode_CreateObjective( "b3Triggers", "b3Triggers", 0, 5 )
 	Objective_Set( "#BEACON_OBJECTIVE_GET_TO_SECOND_DISH", < -256, -592, 96 >, GetEntByScriptName( "dish_on_crane" ) )
 	Objective_StaticModelHighlightOverrideEntity( file.highlightDishModel )
 }
@@ -2175,7 +2176,6 @@ void function HubBattleEndlessBTEnemies( entity player )
 		ArrayRemoveDead( endlessGuys )
 		ArrayRemoveDead( file.returnToHubEnemies )
 		DebugMode_SetProgress( "endless", endlessGuys.len() )
-		EmitSoundOnEntity( GetPlayerArray()[0], "HUD_match_start_timer_tick_1P" )
 		if ( endlessGuys.len() >= 2 )
 			continue
 

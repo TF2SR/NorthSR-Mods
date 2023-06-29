@@ -51,8 +51,6 @@ struct
 
 void function Cl_DebugMode_Init()
 {
-    if (!GetConVarInt("srm_practice_mode")) return
-	
     // Receiving objectives
     AddServerToClientStringCommandCallback( "objective", ServerCallback_ObjectiveReceived )
     file.objectiveCallbacks["waitForEnemyCount"] <- Objective_WaitForEnemyCount
@@ -194,7 +192,7 @@ void function Objectives_Update()
             RuiSetString( d.option2LabelRui, "msgText", "" )
             RuiSetString( d.option2Rui, "msgText", "" )
     
-            if (file.objectives.len() > i) // there's an objective in the array
+            if (file.objectives.len() > i && GetConVarBool("srm_practice_mode")) // there's an objective in the array
             {
                 Objective obj = file.objectives[i]
                 switch (obj.displayType)
@@ -240,18 +238,6 @@ void function ServerCallback_ObjectiveReceived( array<string> args )
 
     switch (command)
     {
-        case "createCustom":
-            Objective obj
-            obj.id = objectiveId
-            obj.type = "custom"
-            array<string> labels = split( CombineArgsIntoString( args.slice(3, args.len()) ), "|" )
-            obj.topLabel = labels[0]
-            obj.bottomLabel = labels[1]
-            if (!(obj.type in file.objectiveCallbacks))
-                throw "Tried to set objective type as \"" + args[2] + "\" which isn't valid (did you forget to add it?)"
-            file.objectives.append(obj)
-            thread ObjectiveThread( obj, WaitUntilComplete )
-            break
         case "create":
             Objective obj
             obj.id = objectiveId
@@ -265,7 +251,8 @@ void function ServerCallback_ObjectiveReceived( array<string> args )
             break
         case "setComplete":
             expect Objective( objective )
-            objective.isComplete = args[2] != "0"
+            // side-note - objectives should end when this is set
+            objective.isComplete = true
             break
         case "setProgress":
             expect Objective( objective )
@@ -317,19 +304,6 @@ Objective ornull function FindObjectiveById( string id )
             return obj
     }
     return null
-}
-
-void function CreateObjectiveTest( string id, string type )
-{
-    Objective obj
-    obj.id = id
-    obj.type = type
-    obj.progress = 10
-    obj.maxProgress = Time() + 15
-    if (!(obj.type in file.objectiveCallbacks))
-        throw "Tried to set objective type as \"" + type + "\" which isn't valid (did you forget to add it?)"
-    file.objectives.append(obj)
-    thread ObjectiveThread( obj, file.objectiveCallbacks[obj.type] )
 }
 
 void function AddObjectiveCallback( string objType, void functionref( Objective ) callback )
@@ -449,7 +423,7 @@ void function Objective_Beacon2Triggers( Objective obj )
                 obj.topLabel = "go to fightroom"
                 break
             case 1:
-                obj.bottomLabel = "hellroom skip time :3"
+                obj.bottomLabel = "killroom skip time :3"
                 break
             case 2:
                 obj.bottomLabel = "fuck the mrvn"

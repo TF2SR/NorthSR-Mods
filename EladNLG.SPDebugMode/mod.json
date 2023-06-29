@@ -14,7 +14,10 @@
         },
         {
             "Path": "_debug_mode.nut",
-            "RunOn": "SERVER && SP"
+            "RunOn": "SERVER && SP",
+            "ServerCallback": {
+                "After": "DebugMode_Init"
+            }
         },
         {
             "Path": "sp/sh_start_points.nut",

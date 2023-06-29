@@ -5915,6 +5915,9 @@ void function WaitForEnemyCount( int count = 0, float timeout = 9999 )
 		wait 0.5
 	}
 
+	// note - always set objectives as complete so they can be removed from the table
+	DebugMode_SetComplete( id )
+
 	if ( file.waveEnemyCount > count )
 		printt( "******* COUNT NOT!!! REACHED", file.waveEnemyCount, count )
 }
