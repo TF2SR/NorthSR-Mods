@@ -7180,46 +7180,28 @@ void function MaltaGunsKillEvents( string guyNames, array<string> spectreNames, 
 {
 	//check seperatly from spectres because spectres spawning depends on grunts living
 	array<entity> guys = GetNPCArrayByScriptName( guyNames )
-    DebugMode_CreateObjective( guyNames, "maltaGunGroup", guys.len(), 0 )
 
-    // this is normally a WaitUntilAllDead func, but since
-    // we want to track the amount of living peeps we need
-    // to change this. _technically_ a behavior change but
-    // doesn't matter at all? DebugMode shouldn't be
-    // enabled anyways in a run... - elad
-	while (guys.len() > 0)
-    {
-        ArrayRemoveDead( guys )
-        DebugMode_SetProgress( guyNames, guys.len() )
-        WaitFrame()
-    }
+    DebugMode_CreateObjective( guyNames, "maltaGunGroup", guys.len(), 0 )
+	DebugMode_TrackEnemyArray( guyNames, guys )
+
+	waitthread WaitUntilAllDead( guys )
 
     DebugMode_SetMaxProgress( guyNames, 1 )
+	
 	//now check the spectres
 	guys = []
 	foreach ( name in spectreNames )
 		guys.extend( GetNPCArrayByScriptName( name, TEAM_IMC ) )
-	// same thing here - elad
-	while (guys.len() > 0)
-    {
-        ArrayRemoveDeadOrLeeched( guys )
-        DebugMode_SetProgress( guyNames, guys.len() )
-        WaitFrame()
-    }
+	
+	svGlobal.levelEnt.Signal( "StopTrack" )
+	DebugMode_TrackEnemyArray( guyNames, guys )
+	
+	waitthread WaitUntilAllDeadOrLeeched( guys )
 
+	svGlobal.levelEnt.Signal( "StopTrack" )
     DebugMode_SetComplete( guyNames )
 
 	FlagSet( killFlag )
-}
-
-// util func for leeched spectres, to preserve vanilla behavior - elad
-void function ArrayRemoveDeadOrLeeched( array<entity> entArray )
-{
-	for ( int i = entArray.len() - 1; i >= 0; i-- )
-	{
-		if ( !IsAlive( entArray[ i ] ) || entArray[i].GetTeam() != TEAM_IMC )
-			entArray.remove( i )
-	}
 }
 
 void function MaltaGuns_KillStraglers()

@@ -5920,6 +5920,7 @@ void function WaitForEnemyCount( int count = 0, float timeout = 9999 )
 
 	if ( file.waveEnemyCount > count )
 		printt( "******* COUNT NOT!!! REACHED", file.waveEnemyCount, count )
+
 }
 
 void function SetDodgeDisabled( entity player, bool state = true )

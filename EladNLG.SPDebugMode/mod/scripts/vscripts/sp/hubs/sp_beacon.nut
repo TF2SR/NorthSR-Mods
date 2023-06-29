@@ -168,7 +168,6 @@ void function CodeCallback_MapInit()
 	RegisterSignal( "PlayerEquippedArcToolAtInnerHatch" )
 	RegisterSignal( "HubEnemyKilledByPlayer" )
 	RegisterSignal( "HubEnemyKilledByBT" )
-	RegisterSignal( "StopTrack" )
 
 	AddStartPoint( "Level Start", 			StartPoint_Start, 						StartPoint_Setup_Start, 					StartPoint_Skipped_Start )
 	AddStartPoint( "Control Room", 			StartPoint_ControlRoom, 				StartPoint_Setup_ControlRoom,				StartPoint_Skipped_ControlRoom )

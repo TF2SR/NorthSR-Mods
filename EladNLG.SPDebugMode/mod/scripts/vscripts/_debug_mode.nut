@@ -12,6 +12,7 @@ table<string, Objective> objectives
 
 void function DebugMode_Init()
 {
+	RegisterSignal( "StopTrack" )
 	AddClientCommandCallback( "restore_doublejump", RestoreDoubleJump )
 	AddCallback_OnLoadSaveGame( OnLoadSaveGame )
 }
@@ -25,10 +26,12 @@ void function LoadObjectives( entity player )
 {
 	WaitFrame()
 	WaitFrame()
-	print("\n\n\nLOADING OBJECTIVES\n\n\n")
 	foreach (string id, Objective obj in objectives)
 		ServerToClientStringCommand( player, "objective " + id + " create " + obj.type + 
 			" " + obj.progress + " " + obj.maxProgress )
+
+	foreach (entity player in GetPlayerArray())
+		Remote_CallFunction_NonReplay( player, "ServerCallback_SetStartPointIndex", level.nv.startPointIndex )
 }
 
 bool function RestoreDoubleJump( entity player, array<string> args )
@@ -83,8 +86,18 @@ void function DebugMode_TrackEnemyArray( string id, array<entity> arr )
 
 	while ( 1 )
 	{
-		ArrayRemoveDead( arr )
+		ArrayRemoveDeadOrLeeched( arr )
 		DebugMode_SetProgress( id, arr.len() )
 		WaitFrame()
+	}
+}
+
+// util func for leeched spectres, to preserve vanilla behavior - elad
+void function ArrayRemoveDeadOrLeeched( array<entity> entArray )
+{
+	for ( int i = entArray.len() - 1; i >= 0; i-- )
+	{
+		if ( !IsAlive( entArray[ i ] ) || entArray[i].GetTeam() != TEAM_IMC )
+			entArray.remove( i )
 	}
 }
