@@ -30,6 +30,7 @@ void function SRM_InfoHUD_Init()
     // that is found will be displayed and everything else will be skipped
     // otherwise convars are displayed in order as they are registered
     RegisterConVar( "srm_practice_mode", 0.0, "Practice Mode" )
+    RegisterConVar( "srm_force_moonboots", 0.0, "Forced Moonboots" )
     RegisterConVar( "sv_cheats", 0.0 )
     RegisterConVar( "host_timescale", 1.0 )
     RegisterConVar( "player_respawnInputDebounceDuration", 0.5 )

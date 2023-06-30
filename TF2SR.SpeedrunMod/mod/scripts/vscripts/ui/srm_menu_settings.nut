@@ -31,6 +31,11 @@ void function SRM_InitSettingsMenu()
 		SRM_SetupNormalButton( "SwchPracticeMode", "Practice Mode", lbIllegalNote+"`1Some extra tools and settings to make practice a bit easier\n\n`0- Sets sv_cheats to 1\n- Disables input prevention on saveload\n- Makes quicksaves save your velocity\n- Enables use of savestates\n\nNote: Savestates do not account for level progression or NPC positions, as it simply teleports you back to the place where you created the savestate." ),
 		UIE_CLICK, SRM_ClickedPracticeMode
 	)
+	SetupButton(
+		Hud_GetChild( menu, "SwchForceMoonboots"),
+		"Force Moonboots",
+		"`2NOT LEADERBOARD LEGAL!\n\n`1Forcefully enables moonboots."
+		)
 	AddButtonEventHandler(
 		SRM_SetupNormalButton( "BtnPracticeWarps", "Practice Warps", "Warp to dev start points throughout the game to practice segments" ),
 		UIE_CLICK, AdvanceMenuEventHandler( GetMenu( "SRM_PracticeWarpsMenu" ) )

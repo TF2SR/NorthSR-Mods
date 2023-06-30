@@ -107,6 +107,10 @@
 			"Name": "srm_practice_mode",
 			"DefaultValue": "0",
 		},
+		{
+			"Name": "srm_force_moonboots",
+			"DefaultValue": "0",
+		}
 	],
 	"Scripts": [
         {
@@ -142,6 +146,13 @@
 		{
 			"Path": "sp/srm_savestates.nut",
 			"RunOn": "SERVER && SP",
+		},
+		{
+			"Path": "sp/srm_force_moonboots.nut",
+			"RunOn": "SERVER && SP",
+			"ServerCallback": {
+				"After": "SRM_ForceMoonboots_Init"
+			}
 		},
 		{
 			"Path": "client/srm_infohud.nut",
