@@ -68,6 +68,30 @@
 			"Flags": 16777216
 		},
 
+		// Input Display
+		{
+			"Name": "srm_input_display",
+			"DefaultValue": "0",
+			"Flags": 16777216
+		},
+
+		// Input Display Customization
+		{
+			"Name": "srm_input_display_r",
+			"DefaultValue": "255",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_input_display_g",
+			"DefaultValue": "255",
+			"Flags": 16777216
+		},
+		{
+			"Name": "srm_input_display_b",
+			"DefaultValue": "255",
+			"Flags": 16777216
+		},
+
 		// Utility
 		{
 			"Name": "srm_enable_mp",
@@ -116,6 +140,10 @@
 			"RunOn": "UI",
 		},
 		{
+			"Path": "ui/srm_menu_input_display_settings.nut",
+			"RunOn": "UI",
+		},
+		{
 			"Path": "sp/srm_savestates.nut",
 			"RunOn": "SERVER && SP",
 		},
@@ -134,7 +162,10 @@
 			"Path": "client/srm_speedometer.nut",
 			"RunOn": "CLIENT && SP",
 		},
-
+		{
+			"Path": "client/srm_input_display.nut",
+			"RunOn": "CLIENT && SP",
+		},
 
 		{
 			"Path": "ui/srm_menu_practicewarps.nut",

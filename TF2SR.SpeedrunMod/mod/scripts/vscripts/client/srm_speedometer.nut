@@ -51,15 +51,15 @@ void function SRM_SpeedometerUpdate()
 	{
 		case 0: // metric 	(km/h)
 			unitConversionModifier = 0.090
-			speedometerUnitLabel = "km/h"
+			speedometerUnitLabel   = "km/h"
 			break
 		case 1: // imperial (mph)
 			unitConversionModifier = 0.056
-			speedometerUnitLabel = "mph"
+			speedometerUnitLabel   = "mph"
 			break
 		case 2: // units 	(u)
 			unitConversionModifier = 1.000
-			speedometerUnitLabel = "u"
+			speedometerUnitLabel   = "u"
 			break
 	}
 
