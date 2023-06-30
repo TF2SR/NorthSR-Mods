@@ -110,10 +110,11 @@ resource/ui/menus/srm_settings.menu
 			InheritProperties		SwitchButton
 			xpos 					22
 			style					DialogListButton
-			ConVar					"srm_enable_input_display"
+			ConVar					"srm_input_display"
 			list
 			{
-				"#SETTING_ENABLED"	1
+				"Expanded"			2
+				"Normal"			1
 				"#SETTING_DISABLED"	0
 			}
 			pin_to_sibling			BtnSpeedometerSettings

@@ -8,15 +8,18 @@ array<int> keyListeners = [
 	IN_MOVERIGHT,
 
 	IN_JUMP,
-	IN_DUCK
+	IN_DUCK,
+
+	IN_OFFHAND1, // tactical
+	IN_OFFHAND2, // titan utility
+	IN_OFFHAND0, // ordnance
+	IN_USE
 ]
 
 array<var> inputDisplays = []
 
 void function SRM_InputDisplay_Init()
 {
-	if ( !GetConVarInt("srm_enable_input_display") ) return
-
 	AddCallback_EntitiesDidLoad( SRM_SetupInputDisplay )
 	AddCallback_EntitiesDidLoad( SRM_InputDisplayUpdate )
 }
@@ -32,6 +35,11 @@ void function SRM_SetupInputDisplay()
 
 	inputDisplays.append( Hud_GetChild( inputDisplay, "InputJump" ) )
 	inputDisplays.append( Hud_GetChild( inputDisplay, "InputDuck" ) )
+
+	inputDisplays.append( Hud_GetChild( inputDisplay, "InputTactical" ) )
+	inputDisplays.append( Hud_GetChild( inputDisplay, "InputTitanUtility" ) )
+	inputDisplays.append( Hud_GetChild( inputDisplay, "InputOrdnance" ) )
+	inputDisplays.append( Hud_GetChild( inputDisplay, "InputInteract" ) )
 
 	for (int i = 0; i < inputDisplays.len(); i++)
 	{
@@ -62,8 +70,24 @@ void function SRM_InputDisplayUpdate()
 			crosshairPos.y - Hud_GetHeight( inputDisplay ) / 2
 		)
 
+		// check for input display mode
+		int arrayCheckLength
+		switch ( GetConVarInt("srm_input_display") )
+		{
+			case 0: // disabled
+				continue
+			case 1: // normal
+				arrayCheckLength = 6
+				break
+			case 2: // expanded
+				arrayCheckLength = 10
+				break
+			default:
+				arrayCheckLength = keyListeners.len()
+		}
+
 		// check if input is pressed
-		for (int i = 0; i < inputDisplays.len(); i++)
+		for (int i = 0; i < arrayCheckLength; i++)
 		{
 			if ( player.IsInputCommandHeld( keyListeners[i] ) )
 				Hud_SetVisible( inputDisplays[i], true )

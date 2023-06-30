@@ -79,7 +79,7 @@
 		ypos 				-80
 		wide 				32	
 		tall 				32	
-		image 				"vgui/hud/input_arrow_up"
+		image 				"vgui/hud/input_jump"
 		visible 			0
 		scaleImage 			1
 
@@ -94,7 +94,71 @@
 		ypos 				-80
 		wide 				32	
 		tall 				32	
-		image 				"vgui/hud/input_arrow_down"
+		image 				"vgui/hud/input_crouch"
+		visible 			0
+		scaleImage 			1
+
+		pin_to_sibling 				"CenterPoint"
+		pin_corner_to_sibling 		CENTER
+		pin_to_sibling_corner 		TOP_LEFT
+	}
+
+	InputTactical
+	{
+		ControlName 		ImagePanel
+		xpos 				75
+		ypos 				-110
+		wide 				32	
+		tall 				32	
+		image 				"vgui/hud/input_square"
+		visible 			0
+		scaleImage 			1
+
+		pin_to_sibling 				"CenterPoint"
+		pin_corner_to_sibling 		CENTER
+		pin_to_sibling_corner 		TOP_LEFT
+	}
+
+	InputTitanUtility
+	{
+		ControlName 		ImagePanel
+		xpos 				25
+		ypos 				-110
+		wide 				32	
+		tall 				32	
+		image 				"vgui/hud/input_triangle"
+		visible 			0
+		scaleImage 			1
+
+		pin_to_sibling 				"CenterPoint"
+		pin_corner_to_sibling 		CENTER
+		pin_to_sibling_corner 		TOP_LEFT
+	}
+
+	InputOrdnance
+	{
+		ControlName 		ImagePanel
+		xpos 				-25
+		ypos 				-110
+		wide 				32	
+		tall 				32	
+		image 				"vgui/hud/input_diamond"
+		visible 			0
+		scaleImage 			1
+
+		pin_to_sibling 				"CenterPoint"
+		pin_corner_to_sibling 		CENTER
+		pin_to_sibling_corner 		TOP_LEFT
+	}
+
+	InputInteract
+	{
+		ControlName 		ImagePanel
+		xpos 				-75
+		ypos 				-110
+		wide 				32	
+		tall 				32	
+		image 				"vgui/hud/input_circle"
 		visible 			0
 		scaleImage 			1
 
