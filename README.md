@@ -1,11 +1,15 @@
-# NorthstarMods
+# RoninMods
 
-[Squirrel](http://www.squirrel-lang.org/squirreldoc/reference/index.html) scripts used to recreate server-side gamelogic and add [custom content](https://r2northstar.gitbook.io/r2northstar-wiki/using-northstar/gamemodes) to the game. 
+### ⚠️ Currently still under development
 
-## Contents:
+[Squirrel](http://www.squirrel-lang.org/squirreldoc/reference/index.html) scripts that add a lot of useful Tools and Quality of Life features for speedrunners.<br>
+Based on [SRMM](https://github.com/zweek/TF2SR-Menu-Mod) & [Northstar-Mods](https://github.com/R2Northstar/NorthstarMods)
 
-Issues in this repository should be created if they are related to these domains:
-- `Northstar.Client` - Localisation files, UI and client-side scripts.
-- `Northstar.Coop` - Soon™.
-- `Northstar.Custom` - Northstar custom content.
-- `Northstar.CustomServer` - Server config files and scripts necessary for multiplayer.
+## Features:
+
+Include but are not limited to
+- Practice mode
+- Savestates
+- Practice Warps
+- Customizable Speedometer
+- In-game input display
