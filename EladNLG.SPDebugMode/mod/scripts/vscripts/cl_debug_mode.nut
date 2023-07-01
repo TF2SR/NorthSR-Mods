@@ -8,24 +8,33 @@ const RUI_TEXT_CENTER = $"ui/cockpit_console_text_center.rpak"
 const vector GREEN = <0.2, 0.75, 0.2>
 const vector WHITE = <0.9, 0.9, 0.9>
 
+// Sets the objective display type.
+// SINGLE has a single condition.
+// EITHER_OR can have either condition completed.
 enum ObjectiveDisplayType
 {
     SINGLE,
     EITHER_OR
 }
 
+// An objective instance.
 struct Objective
 {
     string id
     int displayType = ObjectiveDisplayType.SINGLE
+    // The objective type.
     string type = ""
     string topLabel
     string bottomLabel
     string topLabel2
     string bottomLabel2
+    // Set by server. If true, the objective should end,
+    // and won't be loaded from checkpoints.
     bool isComplete = false
     bool showCompleteMessage = true
+    // Set by server. Represents a progress variable.
     float progress
+    // Set by server. Represents another progress variable.
     float maxProgress
 }
 
@@ -42,6 +51,7 @@ struct ObjectiveDisplay
 struct
 {
     array<Objective> objectives
+    // A table for setting objective threads, based on type.
     table<string, void functionref( Objective )> objectiveCallbacks 
     var progressRui
     var partLabelRui
@@ -53,6 +63,8 @@ void function Cl_DebugMode_Init()
 {
     // Receiving objectives
     AddServerToClientStringCommandCallback( "objective", ServerCallback_ObjectiveReceived )
+    // add new objective functions here.
+    // the key is the objective TYPE, not ID.
     file.objectiveCallbacks["waitForEnemyCount"] <- Objective_WaitForEnemyCount
     file.objectiveCallbacks["tdayWaves"] <- Objective_TDayWaves
     file.objectiveCallbacks["maltaGunGroup"] <- Objective_MaltaGunGroup
@@ -177,8 +189,16 @@ void function Objectives_Update()
         array<StartPointCSV> startPoints = GetStartPointsForMap( GetMapName() )
         int parts = startPoints.len()
         
-        RuiSetString( file.progressRui, "msgText", format( "sp_StartPoint %i", part ) )
-        RuiSetString( file.partLabelRui, "msgText", startPoints[file.startPointIndex].name )
+        if (GetConVarBool("srm_practice_mode"))
+        {
+            RuiSetString( file.progressRui, "msgText", format( "sp_StartPoint %i", part ) )
+            RuiSetString( file.partLabelRui, "msgText", startPoints[file.startPointIndex].name )
+        }
+        else
+        {
+            RuiSetString( file.progressRui, "msgText", "" )
+            RuiSetString( file.partLabelRui, "msgText", "" )
+        }
 
         for (int i = 0; i < file.displays.len(); i++)
         {
@@ -311,10 +331,8 @@ void function AddObjectiveCallback( string objType, void functionref( Objective 
     file.objectiveCallbacks[objType] <- callback
 }
 
-
 void function ServerCallback_SetStartPointIndex( int index )
 {
-    printt("\nSETSTARTPOINTINDEX", index)
     file.startPointIndex = index
 }
 
@@ -326,6 +344,11 @@ void function WaitUntilComplete( Objective obj )
     }
 }
 
+// an objective is a thread - when the thread ends,
+// the objective is considered complete. always
+// make sure to add `!obj.isComplete` as a condition
+// for while loops, so when the server sets an
+// objective as complete, it ends on client as well.
 void function Objective_WaitForEnemyCount( Objective obj )
 {
     obj.displayType = ObjectiveDisplayType.EITHER_OR
@@ -333,7 +356,7 @@ void function Objective_WaitForEnemyCount( Objective obj )
     obj.topLabel2 = "Wait"
     
     // progress - enemies left, maxProgress - end time
-    while (obj.progress > 0.0 && Time() < obj.maxProgress)
+    while (obj.progress > 0.0 && Time() < obj.maxProgress && !obj.isComplete)
     {
         WaitFrame()
         obj.bottomLabel = format( "%i remain", int( obj.progress ) )
@@ -455,7 +478,7 @@ void function Objective_HubFight( Objective obj )
             float timeUntilCleanup = obj.maxProgress - Time()
             if (timeUntilCleanup > 0)
             {
-                obj.topLabel = "Cleanup in 0:" + int(ceil(timeUntilCleanup))
+                obj.topLabel = "Cleanup in " + int(ceil(timeUntilCleanup)) + "..."
             }
             else
             {
