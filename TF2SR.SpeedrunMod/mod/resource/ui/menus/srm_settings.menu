@@ -300,6 +300,42 @@ resource/ui/menus/srm_settings.menu
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+		// TAS Tools Subheader
+		ImgTasSubheaderBackground
+		{
+			ControlName				ImagePanel
+			InheritProperties		SubheaderBackground
+			xpos					990
+			ypos 					540
+		}
+		LblTasSubheaderText
+		{
+			ControlName				Label
+			InheritProperties		SubheaderText
+			pin_to_sibling			ImgTasSubheaderBackground
+			pin_corner_to_sibling	LEFT
+			pin_to_sibling_corner	LEFT
+			labelText				"TAS Tools"
+		}
+
+		SwchTasMode
+		{
+			ControlName				RuiButton
+			InheritProperties		SwitchButton
+			style					DialogListButton
+			ConVar					"srm_tasmode"
+			list
+			{
+				"#SETTING_DISABLED"	0
+				"#SETTING_ENABLED"	1
+			}
+			pin_to_sibling			ImgTasSubheaderBackground
+			pin_corner_to_sibling	TOP_LEFT
+			pin_to_sibling_corner	BOTTOM_LEFT
+		}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		FooterButtons
 		{
 			ControlName				CNestedPanel

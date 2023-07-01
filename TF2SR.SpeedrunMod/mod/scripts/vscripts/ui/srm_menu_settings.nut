@@ -25,7 +25,7 @@ void function SRM_InitSettingsMenu()
 		SRM_SetupNormalButton( "SwchPracticeMode", "Practice Mode", lbIllegalNote+"`1Some extra tools and settings to make practice a bit easier\n\n`0- Sets sv_cheats to 1\n- Disables input prevention on saveload\n- Makes quicksaves save your velocity\n- Enables use of savestates\n\nNote: Savestates do not account for level progression or NPC positions, as it simply teleports you back to the place where you created the savestate." ),
 		UIE_CLICK, SRM_ClickedPracticeMode
 	)
-	SRM_SetupNormalButton( "SwchForceMoonboots", "Force Moonboots", "`2NOT LEADERBOARD LEGAL!\n\n`1Forcefully enables moonboots.\n\n`2Does not work on NCS saves" )
+	SRM_SetupNormalButton( "SwchForceMoonboots", "Force Moonboots", lbIllegalNote+"`1Forcefully enables moonboots.\n\n`2Does not work on NCS saves" )
 	AddButtonEventHandler(
 		SRM_SetupNormalButton( "BtnPracticeWarps", "Practice Warps", "Warp to dev start points throughout the game to practice segments" ),
 		UIE_CLICK, AdvanceMenuEventHandler( GetMenu( "SRM_PracticeWarpsMenu" ) )
@@ -43,6 +43,11 @@ void function SRM_InitSettingsMenu()
 		UIE_CLICK, SRM_ClickedUnlockAllLevels
 	)
 
+	AddButtonEventHandler(
+		SRM_SetupNormalButton( "SwchTasMode", "TAS Mode", lbIllegalNote+"`1Enables some settings to make segmented TASing easier\n\n`0- sv_cheats\n- input debounce\n- audio fade" ),
+		UIE_CLICK, SRM_ClickedTasMode
+	)
+
 	SRM_SetupFooter()
 }
 
@@ -57,6 +62,29 @@ void function SRM_ClickedPracticeMode( var button )
 	{
 		SetConVarInt("sv_cheats", 0)
 		SetConVarFloat("player_respawnInputDebounceDuration", 0.5)
+	}
+}
+
+void function SRM_ClickedTasMode( var button )
+{
+	if (GetConVarInt("srm_tasmode") == 1)
+	{
+		SetConVarInt("sv_cheats", 1)
+		// input prevention on load
+		SetConVarFloat("player_respawnInputDebounceDuration", 0.0)
+		// audio fade
+		SetConVarFloat("miles_map_begin_fade_time", 0)
+		SetConVarFloat("miles_map_begin_silence_time", 0)
+		// command queue to make lower timescales work
+		SetConVarInt("sv_usercmd_max_queued", 1000)
+	} else
+	{
+		// revert to default values
+		SetConVarInt("sv_cheats", 0)
+		SetConVarFloat("player_respawnInputDebounceDuration", 0.5)
+		SetConVarFloat("miles_map_begin_fade_time", 1.5)
+		SetConVarFloat("miles_map_begin_silence_time", 0.5)
+		SetConVarInt("sv_usercmd_max_queued", 40)
 	}
 }
 

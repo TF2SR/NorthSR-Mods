@@ -50,6 +50,13 @@ void function SRM_InfoHUD_Thread()
     {
         WaitFrame()
 
+        if (GetConVarInt("srm_tasmode") == 1) 
+        {
+            RuiSetString( CustomConVarDisplay.rui, "msgText", "" )
+            RuiSetString( DefaultConVarDisplay.rui, "msgText", "" )
+            continue
+        }
+
         UpdateModdedConVars( SRM_CustomConVars )
         for (int i = 0; i < SRM_CustomConVars.len(); i++)
         {
