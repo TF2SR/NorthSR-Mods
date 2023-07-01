@@ -24,12 +24,12 @@
 		// Speedometer Customization
 		{
 			"Name": "srm_speedometer_position_x",
-			"DefaultValue": "0.5",
+			"DefaultValue": "0.6",
 			"Flags": 16777216
 		},
 		{
 			"Name": "srm_speedometer_position_y",
-			"DefaultValue": "0.5",
+			"DefaultValue": "0.48",
 			"Flags": 16777216
 		},
 		{
