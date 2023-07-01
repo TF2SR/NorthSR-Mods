@@ -1,16 +1,10 @@
 global function SRM_InitSettingsMenu
 global function SRM_AddSettingSubmenus
 
-struct
-{
-	var menu
-	table<var,string> buttonDescriptions
-	var itemDescriptionBox
-} file
 
 void function SRM_InitSettingsMenu()
 {
-	SRM_MenuInit( "SRM_SettingsMenu", "LblMenuItemDescription" )
+	SRM_MenuInit( "SRM_SettingsMenu" )
 
 	// HUD
 	SRM_SetupNormalButton( "SwchSpeedometer", "Speedometer", "Enables a speedometer in single player."+mustReloadNote )

@@ -1,17 +1,10 @@
 global function SRM_InitSpeedometerSettingsMenu
 
-struct
-{
-	var menu
-	table<var,string> buttonDescriptions
-	var itemDescriptionBox
-} file
-
-string colorDescription = "Individual color components.\nThe color will interpolate between the slow & fast components depending on your speed.\n\nFor nerds:\n`1slow`0 is 0\n`1fast`0 is 1000u / 90km/h / 56mph"
+string colorDescription = "Individual color components.\nThe color will interpolate between the slow & fast components depending on your speed.\n\nFor nerds:\n`1slow`0 is 300u / 27km/h / 17mph\n`1fast`0 is 1000u / 90km/h / 56mph"
 
 void function SRM_InitSpeedometerSettingsMenu()
 {
-	SRM_MenuInit( "SRM_SpeedometerSettingsMenu", "LblMenuItemDescription" )
+	SRM_MenuInit( "SRM_SpeedometerSettingsMenu" )
 
 	// functional settings
 	SRM_SetupNormalButton( "SwchSpeedometerUnit", "Unit", "Determines the measuring unit used for displaying the speed (kph/mph/u)\n\n`2Requires a reload for changes to take effect" )
