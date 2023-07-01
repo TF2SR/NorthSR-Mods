@@ -49,15 +49,19 @@ void function SRM_SpeedometerUpdate()
 	string speedometerUnitLabel
 	switch ( GetConVarInt("srm_speedometer_unit") )
 	{
-		case 0: // metric 	(km/h)
+		case 0:
 			unitConversionModifier = 0.090
 			speedometerUnitLabel   = "km/h"
 			break
-		case 1: // imperial (mph)
+		case 1:
+			unitConversionModifier = 0.025
+			speedometerUnitLabel   = "m/s"
+			break
+		case 2:
 			unitConversionModifier = 0.056
 			speedometerUnitLabel   = "mph"
 			break
-		case 2: // units 	(u)
+		case 3:
 			unitConversionModifier = 1.000
 			speedometerUnitLabel   = "u"
 			break
