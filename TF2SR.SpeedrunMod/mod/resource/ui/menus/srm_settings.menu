@@ -236,7 +236,7 @@ resource/ui/menus/srm_settings.menu
 			ControlName				ImagePanel
 			InheritProperties		SubheaderBackground
 			xpos					96
-			ypos 					590
+			ypos 					640
 		}
 		LblUtilitySubheaderText
 		{
