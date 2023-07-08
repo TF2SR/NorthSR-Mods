@@ -50,7 +50,7 @@ void function SRM_InfoHUD_Thread()
     {
         WaitFrame()
 
-        if (GetConVarInt("srm_tasmode") == 1) 
+        if (GetConVarInt("fzzy_enableTas") == 1) 
         {
             RuiSetString( CustomConVarDisplay.rui, "msgText", "" )
             RuiSetString( DefaultConVarDisplay.rui, "msgText", "" )

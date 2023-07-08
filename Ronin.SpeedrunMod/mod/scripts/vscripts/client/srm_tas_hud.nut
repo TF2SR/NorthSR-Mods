@@ -23,7 +23,7 @@ void function SRM_TasHUD_Thread()
 	{
 		WaitFrame()
 
-		if (GetConVarInt("srm_tasmode") == 1)
+		if (GetConVarInt("fzzy_enableTas") == 1)
 		{
     		RuiSetString( tasLabel.rui, "msgText", "TAS" )
     		RuiSetString( tasTimescaleLabel.rui, "msgText", GetConVarString("host_timescale").tostring() )

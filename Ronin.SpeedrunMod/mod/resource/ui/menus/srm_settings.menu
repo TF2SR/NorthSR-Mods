@@ -253,7 +253,7 @@ resource/ui/menus/srm_settings.menu
 			ControlName				RuiButton
 			InheritProperties		SwitchButton
 			style					DialogListButton
-			ConVar					"srm_enable_ckf"
+			ConVar					"fzzy_enableCkf"
 			list
 			{
 				"#SETTING_ENABLED"	1
@@ -323,7 +323,7 @@ resource/ui/menus/srm_settings.menu
 			ControlName				RuiButton
 			InheritProperties		SwitchButton
 			style					DialogListButton
-			ConVar					"srm_tasmode"
+			ConVar					"fzzy_enableTas"
 			list
 			{
 				"#SETTING_DISABLED"	0

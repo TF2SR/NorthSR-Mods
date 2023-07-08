@@ -67,7 +67,7 @@ void function SRM_ClickedPracticeMode( var button )
 
 void function SRM_ClickedTasMode( var button )
 {
-	if (GetConVarInt("srm_tasmode") == 1)
+	if (GetConVarInt("fzzy_enableTas") == 1)
 	{
 		SetConVarInt("sv_cheats", 1)
 		// input prevention on load
