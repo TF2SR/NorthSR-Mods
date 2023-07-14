@@ -84,6 +84,9 @@ void function DebugMode_TrackEnemyArray( string id, array<entity> arr )
 {
 	svGlobal.levelEnt.EndSignal( "StopTrack" )
 
+	// fix for servertoclientstringcommands not necessarily arriving at the order you send them.
+	WaitFrame()
+
 	while ( 1 )
 	{
 		ArrayRemoveDeadOrLeeched( arr )

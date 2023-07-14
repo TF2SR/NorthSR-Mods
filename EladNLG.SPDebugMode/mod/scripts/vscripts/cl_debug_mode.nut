@@ -61,6 +61,8 @@ struct
 
 void function Cl_DebugMode_Init()
 {
+    if (!GetConVarInt("srm_practice_mode")) return
+    
     // Receiving objectives
     AddServerToClientStringCommandCallback( "objective", ServerCallback_ObjectiveReceived )
     // add new objective functions here.

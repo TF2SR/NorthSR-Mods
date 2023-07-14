@@ -2210,7 +2210,7 @@ void function HubBattleBeforeFastballToDish( entity player )
 	thread HubBattleDropships()
 	thread HubBattleContextDialogue( player )
 
-	DebugMode_CreateObjective( "hub_fight", "hubFight", 0, -1 )
+	DebugMode_CreateObjective( "hub_fight", "hubFight", file.returnToHubEnemies.len(), -1 )
 	thread DebugMode_TrackEnemyArray( "hub_fight", file.returnToHubEnemies )
 	FlagWait( "AllDelayedHubEnemiesSpawned" )
 	DebugMode_SetMaxProgress( "hub_fight", Time() + 45.0 )
@@ -2220,7 +2220,8 @@ void function HubBattleBeforeFastballToDish( entity player )
 	while ( file.returnToHubEnemies.len() > 0 )
 	{
 		wait 1.0
-		EmitSoundOnEntity( GetPlayerArray()[0], "HUD_match_start_timer_5_seconds_1P" )
+		if (GetConVarBool("srm_practice_mode"))
+			EmitSoundOnEntity( GetPlayerArray()[0], "HUD_match_start_timer_5_seconds_1P" )
 		ArrayRemoveDead( file.returnToHubEnemies )
 	}
 	DebugMode_SetComplete( "hub_fight" )
