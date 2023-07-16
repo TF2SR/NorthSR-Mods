@@ -105,9 +105,9 @@ vector function SRM_SpeedometerColorLerp(float speedometerVelocity)
 {
 	// there's probably a much better way of doing this by storing the convars as an actual vector but idk how :[
 	return <
-	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_r"), GetConVarFloat("srm_speedometer_color_fast_r") ),
-	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_g"), GetConVarFloat("srm_speedometer_color_fast_g") ),
-	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_b"), GetConVarFloat("srm_speedometer_color_fast_b") )
+	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_r") / 255, GetConVarFloat("srm_speedometer_color_fast_r") / 255 ),
+	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_g") / 255, GetConVarFloat("srm_speedometer_color_fast_g") / 255 ),
+	GraphCapped( speedometerVelocity, 300.0, 1000.0, GetConVarFloat("srm_speedometer_color_slow_b") / 255, GetConVarFloat("srm_speedometer_color_fast_b") / 255 )
 	>
 }
 

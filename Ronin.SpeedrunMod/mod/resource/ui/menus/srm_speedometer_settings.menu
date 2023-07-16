@@ -243,9 +243,9 @@ resource/ui/menus/srm_speedometer_settings.menu
 			navUp					SldSpeedometerPositionY
 			navDown					SldFilmGrain
 			conCommand				"srm_speedometer_color_slow_r"
-			minValue				0.0
-			maxValue				1.0
-			stepSize				0.01
+			minValue				0
+			maxValue				255	
+			stepSize				1
 			inverseFill				0
 			BtnDropButton
 			{
@@ -293,9 +293,9 @@ resource/ui/menus/srm_speedometer_settings.menu
 			navUp					SldSpeedometerPositionY
 			navDown					SldFilmGrain
 			conCommand				"srm_speedometer_color_slow_g"
-			minValue				0.0
-			maxValue				1.0
-			stepSize				0.01
+			minValue				0
+			maxValue				255	
+			stepSize				1
 			inverseFill				0
 			BtnDropButton
 			{
@@ -343,9 +343,9 @@ resource/ui/menus/srm_speedometer_settings.menu
 			navUp					SldSpeedometerPositionY
 			navDown					SldFilmGrain
 			conCommand				"srm_speedometer_color_slow_b"
-			minValue				0.0
-			maxValue				1.0
-			stepSize				0.01
+			minValue				0
+			maxValue				255	
+			stepSize				1
 			inverseFill				0
 			BtnDropButton
 			{
@@ -395,9 +395,9 @@ resource/ui/menus/srm_speedometer_settings.menu
 			navUp					SldSpeedometerColorSlowB
 			navDown					SldFilmGrain
 			conCommand				"srm_speedometer_color_fast_r"
-			minValue				0.0
-			maxValue				1.0
-			stepSize				0.01
+			minValue				0
+			maxValue				255	
+			stepSize				1
 			inverseFill				0
 			BtnDropButton
 			{
@@ -445,9 +445,9 @@ resource/ui/menus/srm_speedometer_settings.menu
 			navUp					SldSpeedometerPositionY
 			navDown					SldFilmGrain
 			conCommand				"srm_speedometer_color_fast_g"
-			minValue				0.0
-			maxValue				1.0
-			stepSize				0.01
+			minValue				0
+			maxValue				255	
+			stepSize				1
 			inverseFill				0
 			BtnDropButton
 			{
@@ -495,9 +495,9 @@ resource/ui/menus/srm_speedometer_settings.menu
 			navUp					SldSpeedometerPositionY
 			navDown					SldFilmGrain
 			conCommand				"srm_speedometer_color_fast_b"
-			minValue				0.0
-			maxValue				1.0
-			stepSize				0.01
+			minValue				0
+			maxValue				255	
+			stepSize				1
 			inverseFill				0
 			BtnDropButton
 			{

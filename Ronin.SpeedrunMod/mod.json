@@ -34,32 +34,32 @@
 		},
 		{
 			"Name": "srm_speedometer_color_slow_r",
-			"DefaultValue": "1.0",
+			"DefaultValue": "255",
 			"Flags": 16777216
 		},
 		{
 			"Name": "srm_speedometer_color_slow_g",
-			"DefaultValue": "1.0",
+			"DefaultValue": "255",
 			"Flags": 16777216
 		},
 		{
 			"Name": "srm_speedometer_color_slow_b",
-			"DefaultValue": "1.0",
+			"DefaultValue": "255",
 			"Flags": 16777216
 		},
 		{
 			"Name": "srm_speedometer_color_fast_r",
-			"DefaultValue": "1.0",
+			"DefaultValue": "255",
 			"Flags": 16777216
 		},
 		{
 			"Name": "srm_speedometer_color_fast_g",
-			"DefaultValue": "0.0",
+			"DefaultValue": "0",
 			"Flags": 16777216
 		},
 		{
 			"Name": "srm_speedometer_color_fast_b",
-			"DefaultValue": "0.0",
+			"DefaultValue": "0",
 			"Flags": 16777216
 		},
 		{
