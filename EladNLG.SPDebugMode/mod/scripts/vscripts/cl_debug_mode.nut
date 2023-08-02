@@ -61,8 +61,6 @@ struct
 
 void function Cl_DebugMode_Init()
 {
-    if (!GetConVarInt("srm_practice_mode")) return
-    
     // Receiving objectives
     AddServerToClientStringCommandCallback( "objective", ServerCallback_ObjectiveReceived )
     // add new objective functions here.
@@ -254,36 +252,43 @@ void function ServerCallback_ObjectiveReceived( array<string> args )
 {
     if (args.len() < 2)
         return
-    string command = args[1]
-    string objectiveId = args[0]
-    Objective ornull objective = FindObjectiveById(objectiveId)
-
-    switch (command)
+    try
     {
-        case "create":
-            Objective obj
-            obj.id = objectiveId
-            obj.type = args[2]
-            obj.progress = float( args[3] )
-            obj.maxProgress = float( args[4] )
-            if (!(obj.type in file.objectiveCallbacks))
-                throw "Tried to set objective type as \"" + args[2] + "\" which isn't valid (did you forget to add it?)"
-            file.objectives.append(obj)
-            thread ObjectiveThread( obj, file.objectiveCallbacks[obj.type] )
-            break
-        case "setComplete":
-            expect Objective( objective )
-            // side-note - objectives should end when this is set
-            objective.isComplete = true
-            break
-        case "setProgress":
-            expect Objective( objective )
-            objective.progress = float( args[2] )
-            break
-        case "setMaxProgress":
-            expect Objective( objective )
-            objective.maxProgress = float( args[2] )
-            break
+        string command = args[1]
+        string objectiveId = args[0]
+        Objective ornull objective = FindObjectiveById(objectiveId)
+
+        switch (command)
+        {
+            case "create":
+                Objective obj
+                obj.id = objectiveId
+                obj.type = args[2]
+                obj.progress = float( args[3] )
+                obj.maxProgress = float( args[4] )
+                if (!(obj.type in file.objectiveCallbacks))
+                    throw "Tried to set objective type as \"" + args[2] + "\" which isn't valid (did you forget to add it?)"
+                file.objectives.append(obj)
+                thread ObjectiveThread( obj, file.objectiveCallbacks[obj.type] )
+                break
+            case "setComplete":
+                expect Objective( objective )
+                // side-note - objectives should end when this is set
+                objective.isComplete = true
+                break
+            case "setProgress":
+                expect Objective( objective )
+                objective.progress = float( args[2] )
+                break
+            case "setMaxProgress":
+                expect Objective( objective )
+                objective.maxProgress = float( args[2] )
+                break
+        }
+    }
+    catch (ex)
+    {
+        print("ERROR!!\n\n" + ex)
     }
 }
 

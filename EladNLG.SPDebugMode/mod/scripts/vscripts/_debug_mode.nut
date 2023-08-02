@@ -14,10 +14,10 @@ void function DebugMode_Init()
 {
 	RegisterSignal( "StopTrack" )
 	AddClientCommandCallback( "restore_doublejump", RestoreDoubleJump )
-	AddCallback_OnLoadSaveGame( OnLoadSaveGame )
+	AddCallback_OnLoadSaveGame( DebugMode_OnLoadSaveGame )
 }
 
-void function OnLoadSaveGame( entity player )
+void function DebugMode_OnLoadSaveGame( entity player )
 {
 	thread LoadObjectives( player )
 }
