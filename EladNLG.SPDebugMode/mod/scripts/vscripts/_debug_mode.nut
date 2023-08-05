@@ -70,14 +70,20 @@ void function DebugMode_SetProgress( string id, var progress )
 {
 	foreach (entity player in GetPlayerArray())
 		ServerToClientStringCommand( player, "objective " + id + " setProgress " + progress )
-	objectives[id].progress = float( progress )
+	if (typeof(progress) == "float")
+		objectives[id].progress = expect float( progress )
+	else
+		objectives[id].progress = float( progress )
 }
 
-void function DebugMode_SetMaxProgress( string id, float maxProgress )
+void function DebugMode_SetMaxProgress( string id, var maxProgress )
 {
 	foreach (entity player in GetPlayerArray())
 		ServerToClientStringCommand( player, "objective " + id + " setMaxProgress " + maxProgress )
-	objectives[id].maxProgress = maxProgress
+	if (typeof(maxProgress) == "float")
+		objectives[id].maxProgress = expect float( maxProgress )
+	else
+		objectives[id].maxProgress = float( maxProgress )
 }
 
 void function DebugMode_TrackEnemyArray( string id, array<entity> arr )
